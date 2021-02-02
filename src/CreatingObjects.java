@@ -16,43 +16,13 @@ public class CreatingObjects {
     public static Place currentPlace;
     public static ArrayList<Enemy> enemyList = new ArrayList<>();
     public static ArrayList<Place> placesList = new ArrayList<>();
-    public static ArrayList<Weapons> weaponList = new ArrayList<>();
+    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
     public static ArrayList<Heros> herosList = new ArrayList<>();
     public static ArrayList<Items> inventory = new ArrayList<>();
 
     public static Random random = new Random();
 
 
-    //Creating random weapon
-    public Weapons createWeapon() {
-        int input = (random.nextInt(7) + 1);
-        switch (input) {
-            case 1:
-                weaponObject = new Weapons(Weapons.WeaponName.NARSIL, "Narsil", 20);
-                break;
-            case 2:
-                weaponObject = new Weapons(Weapons.WeaponName.AXE, "Axe", 11);
-                break;
-            case 3:
-                weaponObject = new Weapons(Weapons.WeaponName.ELFBOW, "Elfbow", 13);
-                break;
-            case 4:
-                weaponObject = new Weapons(Weapons.WeaponName.KNIFE, "Knife", 5);
-            case 5:
-                weaponObject = new Weapons(Weapons.WeaponName.STING, "Sting", 10);
-                break;
-            case 6:
-                weaponObject = new Weapons(Weapons.WeaponName.ORCRIST, "Orchrist", 18);
-                break;
-            case 7:
-                weaponObject = new Weapons(Weapons.WeaponName.GLAMDRING, "Glamdring", 10);
-                break;
-            default:
-                System.out.println("Invalid Entry");
-
-        }
-        return weaponObject;
-    }
 
     //Creating an Hero
     public Heros createHero(int input) {
@@ -94,6 +64,37 @@ public class CreatingObjects {
         System.out.println("Your hero's is " + currentHero.getName());
         GameStart.printSeparator(20);
         return currentHero;
+    }
+
+    //Creating random weapon
+    public Weapons createWeapon() {
+        int input = (random.nextInt(7) + 1);
+        switch (input) {
+            case 1:
+                weaponObject = new Weapons(Weapons.WeaponName.NARSIL, "Narsil", 20);
+                break;
+            case 2:
+                weaponObject = new Weapons(Weapons.WeaponName.AXE, "Axe", 11);
+                break;
+            case 3:
+                weaponObject = new Weapons(Weapons.WeaponName.ELFBOW, "Elfbow", 13);
+                break;
+            case 4:
+                weaponObject = new Weapons(Weapons.WeaponName.KNIFE, "Knife", 5);
+            case 5:
+                weaponObject = new Weapons(Weapons.WeaponName.STING, "Sting", 10);
+                break;
+            case 6:
+                weaponObject = new Weapons(Weapons.WeaponName.ORCRIST, "Orchrist", 18);
+                break;
+            case 7:
+                weaponObject = new Weapons(Weapons.WeaponName.GLAMDRING, "Glamdring", 10);
+                break;
+            default:
+                System.out.println("Invalid Entry");
+
+        }
+        return weaponObject;
     }
 
     //    Creating an enemy
@@ -177,20 +178,25 @@ public class CreatingObjects {
         placesList.add(new Place(Place.placeName.ISENGARD, "Isengard", 8));
         placesList.add(new Place(Place.placeName.RIVENDELL, "Rivendel", 6));
         placesList.add(new Place(Place.placeName.MINASTRITH, "Minastrith", 15));
+
     }
 
 
     //Creating weapon list
     public static void weaponList() {
-        weaponList.add(new Weapons(Weapons.WeaponName.ORCRIST, "Orchrist", 18));
-        weaponList.add(new Weapons(Weapons.WeaponName.NARSIL, "Narsil", 20));
-        weaponList.add(new Weapons(Weapons.WeaponName.AXE, "Axe", 11));
-        weaponList.add(new Weapons(Weapons.WeaponName.ELFBOW, "Elfbow", 13));
-        weaponList.add(new Weapons(Weapons.WeaponName.KNIFE, "Knife", 5));
-        weaponList.add(new Weapons(Weapons.WeaponName.STING, "Sting", 10));
-        weaponList.add(new Weapons(Weapons.WeaponName.GLAMDRING, "Glamdring", 10));
+        weaponsList.add(new Weapons(Weapons.WeaponName.ORCRIST, "Orchrist", 18));
+        weaponsList.add(new Weapons(Weapons.WeaponName.NARSIL, "Narsil", 20));
+        weaponsList.add(new Weapons(Weapons.WeaponName.AXE, "Axe", 11));
+        weaponsList.add(new Weapons(Weapons.WeaponName.ELFBOW, "Elfbow", 13));
+        weaponsList.add(new Weapons(Weapons.WeaponName.KNIFE, "Knife", 5));
+        weaponsList.add(new Weapons(Weapons.WeaponName.STING, "Sting", 10));
+        weaponsList.add(new Weapons(Weapons.WeaponName.GLAMDRING, "Glamdring", 10));
+        weaponsList.add(new Weapons(Weapons.WeaponName.GANDALFSTAFF, "Gandalf Staff",25 ));
+        weaponsList.add(new Weapons(Weapons.WeaponName.ELRONDSRING, "Elrond Ring", 30));
+        weaponsList.add(new Weapons(Weapons.WeaponName.ONERING, "One Ring", 50));
 
     }
+
     //Creating hero list
     public static void heroList() {
         herosList.add(new Heros(Heros.HerosName.FRODO, "Frodo", 40, 5));

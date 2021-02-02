@@ -1,0 +1,70 @@
+I have a file with 900 pages of analyses, and a contagious plan for war with Mars including 14 different scenarios about what to do if they develop unexpected new technology. My file, what to do even advance alien species comes calling its pages long, and it begins with step one, find God.
+
+
+
+@startuml
+
+title Classes - Class Diagram
+
+
+class HerosSpecs {
+  - String Name
+  - int power
+  - int maxPower
+  - int makeDamage
+  - int level
+  + HeroSpecialities(String, int, int, int)
+  + HeroSpecialities()
+  + String setHeroPower(int)
+  + void getHeroName()
+  + void setMakeDamage(int)
+  + int getMakeDamage()
+  + int getPower()
+  + void setPower(int)
+  + void setLevel(int)
+  + setPower(String)
+  
+  
+}
+class Hero{
+    - HeroNameEnums
+    + void setUpHeros(String)]
+    + void grabWeapon(Weapon)
+    + Weapon getGrabbedWeapon()
+    + void handOverWeapon(Weapon)
+    + String getPlayerNameString()
+    + int getPlayerPowerInt()
+    + void setPlayerPower()
+    + int getPlayerDamageInt()
+    + int getPlayerLevelInt()
+    + String descriptionOfHeros()
+    + String getHeroInfo() 
+}
+class Villain{
+    + void setVillains(String)
+    + String getVillainNameString()
+    + void getVillainName()
+    + int getVillainPower()
+    + int getVillainDamageInt()
+    + void setVillainPower(int)
+    + String villainDescription(String)
+    + String villaininfo()
+}
+class VillainSpecs{
+    - String VillainName
+    - int VillainDamage
+    - int VillainLevel
+    - int VillainPower
+    + VillainSpecs(String, int, int, int)
+    + VillainSpec()
+    + String getVillainName()
+    + int getVillainDamage()
+    + int getVillainLevel()
+    + void setVillainPower()
+    + void setVillainDamage()
+    + void setVillainLevel()
+    + String getVillainDescription()    
+
+}
+
+@enduml

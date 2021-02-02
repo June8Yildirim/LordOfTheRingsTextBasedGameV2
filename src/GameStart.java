@@ -9,9 +9,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameStart {
-
-
     public static Heros currentHero;
+    public static Heros secondaryHero;
     public static Weapons currentWeapon;
     public static Enemy currentEnemy;
     public static Place currentPlace;
@@ -70,6 +69,36 @@ public class GameStart {
         currentHero = objects.createHero(input);
     }
 
+    public static Place accessingPlace(String name) {
+        for (int i = 0; i < objects.placesList.size(); i++) {
+            if (name.equals(objects.placesList.get(i).getName())) {
+                currentPlace = objects.placesList.get(i);
+                break;
+            }
+        }
+        return currentPlace;
+    }
+
+    public static Enemy accessingEnemy(String name) {
+        for (int i = 0; i < objects.enemyList.size(); i++) {
+            if (name.equals(objects.enemyList.get(i).getName())) {
+                currentEnemy = objects.enemyList.get(i);
+                break;
+            }
+        }
+        return currentEnemy;
+    }
+
+    public static Weapons accessingWeapon(String name) {
+        for (int i = 0; i < objects.weaponsList.size(); i++) {
+            if (name.equals(objects.weaponsList.get(i).getName())) {
+                currentWeapon = objects.weaponsList.get(i);
+                break;
+            }
+        }
+        return currentWeapon;
+    }
+
     public static void showMenu() {
         printSeparator(30);
         System.out.println("Menu" +
@@ -79,7 +108,6 @@ public class GameStart {
                 "\n(3) Weapon info" +
                 "\n(4) Place Info" +
                 "\n(5) Move next room" +
-                "\n(6) Call another Hero for the help" +
                 "\n(8) Exit");
     }
 
@@ -106,9 +134,6 @@ public class GameStart {
                 case 5:
                     move();
                     break;
-                case 6:
-                    callAnotherHero();
-                    break;
                 case 8:
                     isRunning = false;
                     break;
@@ -119,41 +144,136 @@ public class GameStart {
         }
     }
 
+    //Player moving on place to another
+    public static void move() {
+        System.out.println("Your current place is " + currentPlace.getName());
+        //Before moving to the another location dealing an enemy.
+        randomEncounter();
+        //Displaying possible moving location
+        for (int i = 0; i < currentPlace.findConnection().length; i++) {
+            System.out.println(i + 1 + ". possible location to move " + currentPlace.findConnection()[i]);
+        }
+        System.out.println("Enter place to move");
+        int placeToMove = readInt(6) - 1;
+        String placeName = currentPlace.getName();
+        switch (placeName) {
+            case "Shire":
+                if (currentPlace.findConnection()[placeToMove].equals(Place.placeName.MORIA)) {
+                    accessingPlace("Moria");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                break;
+            case "Moria":
+                if (currentPlace.findConnection()[placeToMove] == Place.placeName.SHIRE) {
+                    accessingPlace("Shire");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
+                    accessingPlace("Isengard");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
+                    accessingPlace("Helms Deep");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                break;
+            case "Helms Deep":
+                if (currentPlace.findConnection()[placeToMove] == Place.placeName.RIVENDELL) {
+                    accessingPlace("Rivendel");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
+                    accessingPlace("Isengard");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MINASTRITH) {
+                    accessingPlace("Minastrith");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                break;
+            case "Isengard":
+                if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
+                    accessingPlace("Helms Deep");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MORIA) {
+                    accessingPlace("Moria");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                break;
+            case "Rivendel":
+                if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
+                    accessingPlace("Helms Deep");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MORIA) {
+                    accessingPlace("Moria");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                break;
+            case "Minastrith":
+                accessingPlace("Minastrith");
+                System.out.println("You are moving at " + currentPlace.getName());
+                printSeparator(20);
+                break;
+        }
+
+    }
+
     //Random encounter for the player and player take a decision
     public static void randomEncounter() {
-        currentEnemy = objects.createEnemy();
         printHeading("What do you want about an enemy? Choice one of the following options.\n(1). Go to battle." +
-                "\n(2). Take a rest.\n(3). Make a Shopping.\n(4). Look Hero's weapon inventory.");
+                "\n(2). Take a rest.\n(3). Grab new Weapon.\n(4). Look Hero's weapon inventory.");
 //User will select one of the option for the next movement.
         int encounter = readInt(3);
         //calling respective methods
         switch (encounter) {
             case 1 -> battle();
             case 2 -> takeRest();
-            case 3 -> shop();
+            case 3 -> addWeaponsInInventory();
             case 4 -> lookInventory();
         }
     }
 
 
     public static void lookInventory() {
-//        if (currentHero.getHerosInventory()[1] == null) {
-//            System.out.println("You only weapon is " + Weapons.WeaponName.KNIFE);
-//        } else {
-//            for (int i = 0; i < 5; i++) {
-//                System.out.println(i + 1 + ". weapon " + currentHero.getHerosInventory()[i]);
-//            }
-//        }
-//
-
+        for (int i = 0; i < currentHero.getHerosInventory().size(); i++) {
+            System.out.println(i + 1 + ". weapon " + currentHero.getHerosInventory().get(i));
+        }
     }
 
     public static void callAnotherHero() {
-        System.out.println("Calling another hero for the help");
+        System.out.println("Which want to call help?");
+        accessingHeros();
+        int input = readInt(10);
+        secondaryHero = objects.createHero(input);
+
     }
 
-    public static void shop() {
+
+    public static void addWeaponsInInventory() {
         printHeading("make a shopping.");
+        System.out.println("Which weapon do you want to grab?");
+        for (int i = 0; i < objects.weaponList(); i++) {
+            System.out.println(i + 1 + ". " + currentPlace.getPossibleWeapons(currentPlace.getType()).get(i));
+        }
+        int newWeapon = readInt(2);
+        switch (newWeapon) {
+            case 1:
+                System.out.println(currentPlace.getPossibleWeapons(currentPlace.getType()).get(1));
+
+                break;
+            case 2:
+
+                break;
+        }
+
+
     }
 
     public static void takeRest() {
@@ -161,6 +281,7 @@ public class GameStart {
     }
 
     public static void battle() {
+//        currentEnemy= objects.createEnemy();
         while (isFighting) {
             printHeading("Your enemy is " + currentEnemy.getName() + "\nEnemy's hp: " + currentEnemy.getHp() + "\nEnemy's max damage capacity: " + currentEnemy.getDamage());
             printHeading("Your hero's name: " + currentHero.getName() + "\nYour hero's hp: " + currentHero.getHp() + "\nHero's max damage capacity: " + currentHero.getDamage());
@@ -169,7 +290,7 @@ public class GameStart {
             printSeparator(20);
             System.out.println("What's your decision about this enemy." +
                     "\nWhile you were taking to decision, you must be wise and  careful." +
-                    "\n(1) Fight,\n(2) Change weapon\n(3) Use Potion for healing,\n(3) Run away.");
+                    "\n(1) Fight,\n(2) Change weapon\n(3) Use Potion for healing,\n(4) Run away.\n(5) Call another Hero for the help.");
             printSeparator(20);
             int battleDecision = readInt(3);
             switch (battleDecision) {
@@ -177,7 +298,7 @@ public class GameStart {
                 case 2 -> changeWeapon();
                 case 3 -> usePotion();
                 case 4 -> runAway();
-
+                case 5 -> callAnotherHero();
             }
         }
     }
@@ -185,17 +306,17 @@ public class GameStart {
 
     // fighting for the current enemy.
     public static void fight() {
-
+        int conditionalEffect = random.nextInt(10);
         //enemy's is to starting point Hp
         int enemyHP = currentEnemy.getHp();
         System.out.println("Do you want to change your current weapon?\n(1) Yes.\n(2) No.");
         int weaponChange = readInt(2);
-        if (weaponChange != 2) {
+        if (weaponChange != 1) {
             //Enemy taken damage by the Hero,and Hero's damage capacity, Hero's weapon and place difficulties this damage.
-            int dmgTookEnemy = currentEnemy.getHp() - ((currentEnemy.getHp() + currentPlace.getDifficulties()) - (currentHero.getDamage() + currentWeapon.getDamage() + currentPlace.getDifficulties()));
+            int dmgTookEnemy = currentEnemy.getHp() - conditionalEffect - ((currentEnemy.getHp() + currentPlace.getDifficulties()) - (currentHero.getDamage() + currentWeapon.getDamage() + currentPlace.getDifficulties()));
 
             //Hero taken damage by the Enemy and, Enemy damage capacity and place difficulties this damage
-            int dmgTookHero = currentHero.getHp() - ((currentHero.getHp() + currentPlace.getDifficulties()) - (currentEnemy.getDamage() + currentPlace.getDifficulties()));
+            int dmgTookHero = currentHero.getHp() - conditionalEffect - ((currentHero.getHp() + currentPlace.getDifficulties()) - (currentEnemy.getDamage() + currentPlace.getDifficulties()));
 
             System.out.println("You took " + dmgTookHero + " damage by " + currentEnemy.getName());
             System.out.println("Enemy took " + dmgTookEnemy + " damage by " + currentHero.getName());
@@ -231,8 +352,13 @@ public class GameStart {
         }
     }
 
+    //Change hero's weapon in his inventory
     public static void changeWeapon() {
         System.out.println("Your current weapon is " + currentWeapon.getName());
+        System.out.println("Currently you are " + currentPlace.getName() + "." +
+                "\nIn your location there is/(are) some weapons.");
+
+        System.out.println("(1). " + currentPlace.getPossibleWeapons(currentPlace.getType()));
 
 
     }
@@ -268,95 +394,6 @@ public class GameStart {
         isRunning = false;
     }
 
-    //Player moving on place to another
-    public static void move() {
-        System.out.println("Your current place is " + currentPlace.getName());
-        //Before moving to the another location dealing an enemy.
-        randomEncounter();
-        //Displaying possible moving location
-        for (int i = 0; i < currentPlace.findConnection().length; i++) {
-            System.out.println(i + 1 + ". possible location to move " + currentPlace.findConnection()[i]);
-        }
-        System.out.println("Enter place to move");
-        int placeToMove = readInt(6) - 1;
-        String placeName= currentPlace.getName();
-        switch (placeName) {
-            case "Shire":
-                if (currentPlace.findConnection()[placeToMove].equals(Place.placeName.MORIA)) {
-                    currentPlace.setName("Moria");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                break;
-            case "Moria":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.SHIRE) {
-                    Moria = currentPlace;
-                    currentPlace = Shire;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
-                    Moria = currentPlace;
-                    currentPlace = Isengard;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.RIVENDELL) {
-                    Moria = currentPlace;
-                    currentPlace = Rivendel;
-                }
-                break;
-            case "Helms Deep":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.RIVENDELL) {
-                    HelmsDeep = currentPlace;
-                    currentPlace = Rivendel;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
-                    HelmsDeep = currentPlace;
-                    currentPlace = Isengard;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MINASTRITH) {
-                    HelmsDeep = currentPlace;
-                    currentPlace = Minastrith;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                break;
-            case "Isengard":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
-                    Isengard = currentPlace;
-                    currentPlace = HelmsDeep;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MORIA) {
-                    Isengard = currentPlace;
-                    currentPlace = Moria;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                break;
-            case "Rivendel":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
-                    Rivendel = currentPlace;
-                    currentPlace = HelmsDeep;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MORIA) {
-                    Rivendel = currentPlace;
-                    currentPlace = Moria;
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                break;
-            case "Minastrith":
-                Minastrith = currentPlace;
-                currentPlace = HelmsDeep;
-                System.out.println("You are moving at " + currentPlace.getName());
-                printSeparator(20);
-                break;
-        }
-
-    }
 
     //Getting weapon's info
     public static void weaponInfo() {
@@ -406,10 +443,14 @@ public class GameStart {
         printHeading("Hello we are starting a new game. This game basic RPG game." +
                 "\nPlease read info and follow the guidelines...");
         accessingHeros();
-//        createEnemy();
-//        currentWeapon
+        objects.placeList();
+        objects.enemyList();
+        objects.weaponList();
+        currentPlace = accessingPlace("Shire");
+        currentWeapon = accessingWeapon("Knife");
+        currentEnemy = accessingEnemy("Orch");
         System.out.println(currentWeapon.getName());
-        currentPlace = new Place(Place.placeName.SHIRE, "Shire", 5);
+        System.out.println(currentEnemy.getName() + currentEnemy.getDamage());
         gameLoop();
     }
 

@@ -1,12 +1,17 @@
 package Places;
 
+import Weapon.Weapons;
+
+import java.util.ArrayList;
+
 public class Place {
     private String desc;
     private placeName type;
     private int difficulties;
     private String Name;
     private placeName[] GetConnected;
-
+    private static ArrayList<Weapons.WeaponName> placeWeapons;
+    private static ArrayList<Weapons> placeWeapon;
     public enum placeName {MORIA, HELMSDEEP, ISENGARD, RIVENDELL, MINASTRITH, SHIRE}
 
 
@@ -39,6 +44,30 @@ public class Place {
         return GetConnected;
     }
 
+    public ArrayList<Weapons.WeaponName> getPossibleWeapons(placeName type ) {
+
+        switch (type) {
+            case SHIRE -> placeWeapons.add(Weapons.WeaponName.STING);
+            case MORIA -> {
+                placeWeapons.add(Weapons.WeaponName.ORCRIST);
+                placeWeapons.add(Weapons.WeaponName.AXE);
+            }
+            case HELMSDEEP -> placeWeapons.add(Weapons.WeaponName.ORCRIST);
+            case RIVENDELL -> {
+                placeWeapons.add(Weapons.WeaponName.ELFBOW);
+                placeWeapons.add(Weapons.WeaponName.ELRONDSRING);
+            }
+            case ISENGARD -> {
+                placeWeapons.add(Weapons.WeaponName.GLAMDRING);
+                placeWeapons.add(Weapons.WeaponName.GANDALFSTAFF);
+            }
+            case MINASTRITH -> {
+                placeWeapons.add(Weapons.WeaponName.NARSIL);
+                placeWeapons.add(Weapons.WeaponName.ONERING);
+            }
+        }
+        return placeWeapons;
+    }
     public placeName[] moveConnected(placeName type) {
         placeName[] tempPlace = null;
         switch (type) {
@@ -52,10 +81,13 @@ public class Place {
                 tempPlace = new placeName[]{placeName.HELMSDEEP, placeName.MORIA};
                 break;
             case HELMSDEEP:
-                tempPlace = new placeName[]{placeName.ISENGARD, placeName.MINASTRITH};
+                tempPlace = new placeName[]{placeName.ISENGARD, placeName.MINASTRITH,placeName.RIVENDELL};
                 break;
             case MINASTRITH:
                 tempPlace = new placeName[]{placeName.HELMSDEEP};
+                break;
+            case RIVENDELL:
+                tempPlace= new placeName[]{placeName.HELMSDEEP, placeName.MORIA};
                 break;
         }
 
