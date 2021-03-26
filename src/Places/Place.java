@@ -11,7 +11,6 @@ public class Place {
     private String Name;
     private placeName[] GetConnected;
     private static ArrayList<Weapons.WeaponName> placeWeapons;
-    private static ArrayList<Weapons> placeWeapon;
     public enum placeName {MORIA, HELMSDEEP, ISENGARD, RIVENDELL, MINASTRITH, SHIRE}
 
 
@@ -23,9 +22,9 @@ public class Place {
         this.type = type;
     }
 
-    public void setName(String name) {
-        Name = name;
-    }
+    public void addWeaponIntoInventory(Weapons.WeaponName weaponName){placeWeapons.add(weaponName);}
+
+    public void removeWeaponFromPlace(Weapons.WeaponName weaponName){ placeWeapons.remove(weaponName);}
 
     public placeName getType() {
         return type;
@@ -35,7 +34,6 @@ public class Place {
         return Name;
     }
 
-
     public int getDifficulties() {
         return difficulties;
     }
@@ -44,30 +42,6 @@ public class Place {
         return GetConnected;
     }
 
-    public ArrayList<Weapons.WeaponName> getPossibleWeapons(placeName type ) {
-
-        switch (type) {
-            case SHIRE -> placeWeapons.add(Weapons.WeaponName.STING);
-            case MORIA -> {
-                placeWeapons.add(Weapons.WeaponName.ORCRIST);
-                placeWeapons.add(Weapons.WeaponName.AXE);
-            }
-            case HELMSDEEP -> placeWeapons.add(Weapons.WeaponName.ORCRIST);
-            case RIVENDELL -> {
-                placeWeapons.add(Weapons.WeaponName.ELFBOW);
-                placeWeapons.add(Weapons.WeaponName.ELRONDSRING);
-            }
-            case ISENGARD -> {
-                placeWeapons.add(Weapons.WeaponName.GLAMDRING);
-                placeWeapons.add(Weapons.WeaponName.GANDALFSTAFF);
-            }
-            case MINASTRITH -> {
-                placeWeapons.add(Weapons.WeaponName.NARSIL);
-                placeWeapons.add(Weapons.WeaponName.ONERING);
-            }
-        }
-        return placeWeapons;
-    }
     public placeName[] moveConnected(placeName type) {
         placeName[] tempPlace = null;
         switch (type) {
@@ -92,6 +66,31 @@ public class Place {
         }
 
         return tempPlace;
+    }
+
+        public Weapons placeWeapons( placeName placeType) {
+            Weapons tempWeapon = new Weapons();
+        switch (placeType) {
+            case SHIRE -> tempWeapon.addWeapon(Weapons.WeaponName.STING);
+            case MORIA -> {
+                tempWeapon.addWeapon(Weapons.WeaponName.ORCRIST);
+                tempWeapon.addWeapon(Weapons.WeaponName.AXE);
+            }
+            case HELMSDEEP -> tempWeapon.addWeapon(Weapons.WeaponName.ORCRIST);
+            case RIVENDELL -> {
+                tempWeapon.addWeapon(Weapons.WeaponName.ELFBOW);
+                tempWeapon.addWeapon(Weapons.WeaponName.ELRONDSRING);
+            }
+            case ISENGARD -> {
+                tempWeapon.addWeapon(Weapons.WeaponName.GLAMDRING);
+                tempWeapon.addWeapon(Weapons.WeaponName.GANDALFSTAFF);
+            }
+            case MINASTRITH -> {
+                tempWeapon.addWeapon(Weapons.WeaponName.NARSIL);
+                tempWeapon.addWeapon(Weapons.WeaponName.ONERING);
+            }
+        }
+        return tempWeapon;
     }
 
     public  String getPlaceDescription(String name) {

@@ -1,22 +1,18 @@
 package Heros;
 
 
-import Places.Place;
-import Places.Place.placeName;
 import Weapon.Weapons;
 
 import java.util.ArrayList;
 
-import static Places.Place.placeName.*;
-
 public class Heros {
+    private Weapons weapons;
     private String Name;
     private int Hp;
     private int MaxHp;
     private int Damage;
     private String desc;
     private static ArrayList<Weapons> herosInventory;
-
 
     public enum HerosName {ARAGORN, LEGOLAS, ELROND, GIMLI, GREYGANDALF, WHITEGANDALF, FRODO, MITHRANDIR, STRIDER, GALADRIEL,}
 
@@ -29,39 +25,19 @@ public class Heros {
 
     }
 
+
     public ArrayList<Weapons> getHerosInventory() {
         return herosInventory;
     }
 
-    public void addItemToInventory(Weapons weapons) {
-        getHerosInventory().add(weapons);
+    public void addWeaponToInventory(Weapons.WeaponName weaponName) {
+        weapons.addWeapon(weaponName);
     }
 
+    public void RemoveWeaponFromInventory(Weapons.WeaponName weaponName) {
+        weapons.addWeapon(weaponName);
+    }
 
-//    public ArrayList<Weapons.WeaponName> getPossibleWeapons( ) {
-//
-//        switch (placeType) {
-//            case SHIRE -> placesWeapon.add(Weapons.WeaponName.STING);
-//            case MORIA -> {
-//                placesWeapon.add(Weapons.WeaponName.ORCRIST);
-//                placesWeapon.add(Weapons.WeaponName.AXE);
-//            }
-//            case HELMSDEEP -> placesWeapon.add(Weapons.WeaponName.ORCRIST);
-//            case RIVENDELL -> {
-//                placesWeapon.add(Weapons.WeaponName.ELFBOW);
-//                placesWeapon.add(Weapons.WeaponName.ELRONDSRING);
-//            }
-//            case ISENGARD -> {
-//                placesWeapon.add(Weapons.WeaponName.GLAMDRING);
-//                placesWeapon.add(Weapons.WeaponName.GANDALFSTAFF);
-//            }
-//            case MINASTRITH -> {
-//                placesWeapon.add(Weapons.WeaponName.NARSIL);
-//                placesWeapon.add(Weapons.WeaponName.ONERING);
-//            }
-//        }
-//        return placesWeapon;
-//    }
 
     public String getHeroDescription(String name) {
         String tempDesc = "";
