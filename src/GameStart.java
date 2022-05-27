@@ -5,6 +5,7 @@ import Heros.Heros;
 import Places.Place;
 import Weapon.Weapons;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,7 +20,8 @@ public class GameStart {
     public static boolean isFighting = true;
     public static Random random = new Random();
     public static String weaponDesc="";
-//    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
+    public static Weapons weaponObject;
+    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
 //    public static CreatingObjects objects = new CreatingObjects();
 
 
@@ -107,9 +109,41 @@ public class GameStart {
 
         System.out.println("Your hero's is " + currentHero.getName());
         GameStart.printSeparator(20);
-//        currentWeapon.createWeaponsList();
+        weaponObject =  new Weapons();
+        currentWeapon = createWeapons();
         return currentHero;
     }
+        //Creating random weapon
+    public  static Weapons createWeapons() {
+        int input = (random.nextInt(7) + 1);
+        switch (input) {
+            case 1:
+                weaponObject.setUpWeapons(Weapons.WeaponName.NARSIL);
+                break;
+            case 2:
+                weaponObject.setUpWeapons(Weapons.WeaponName.AXE);
+                break;
+            case 3:
+                weaponObject.setUpWeapons(Weapons.WeaponName.ELFBOW);
+                break;
+            case 4:
+                weaponObject.setUpWeapons(Weapons.WeaponName.KNIFE);
+            case 5:
+                weaponObject.setUpWeapons(Weapons.WeaponName.STING);
+                break;
+            case 6:
+                weaponObject.setUpWeapons(Weapons.WeaponName.ORCRIST);
+                break;
+            case 7:
+                weaponObject.setUpWeapons(Weapons.WeaponName.GLAMDRING);
+                break;
+            default:
+                System.out.println("Invalid Entry");
+
+        }
+        return weaponObject;
+    }
+
 
     //Creating random weapon
     public static void createWeapon(Weapons.WeaponName weaponName) {
@@ -419,7 +453,7 @@ public class GameStart {
                 if (currentHero.getHp() > currentHero.getMaxHp()) {
                     currentHero.setHp(currentHero.getMaxHp());
                 }
-                printHeading("Do you want to fight again.\nDon't forget! You need more Hp for a powerful enemy.");
+                printHeading("(1) Do you want to fight again.\nDon't forget! You need more Hp for a powerful enemy.\n(2) I want to keep continue on my journey.");
                 int isFightingAgain = readInt(2);
                 if (isFightingAgain == 1) {
                     battle();
@@ -438,7 +472,7 @@ public class GameStart {
         System.out.println("Your current weapon is " + currentWeapon.getName());
         System.out.println("Currently you are " + currentPlace.getName() + "." +
                 "\nIn your location there is/(are) some weapons.");
-//Doesn't finish yet Look very closely.
+        //Doesn't finish yet Look very closely.
         System.out.println("(1). ");
 
 

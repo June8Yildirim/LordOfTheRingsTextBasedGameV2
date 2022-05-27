@@ -7,6 +7,9 @@ public class Weapons {
     private int Damage;
     private String desc;
 
+    public void createWeapons() {
+    }
+
     public enum WeaponName {NARSIL, STING, KNIFE, ORCRIST, ELFBOW, AXE, GLAMDRING, GANDALFSTAFF, ONERING, ELRONDSRING,}
 
     public static ArrayList<WeaponName> weaponsList = new ArrayList<>();
@@ -35,6 +38,7 @@ public class Weapons {
     public int getDamage() {
         return Damage;
     }
+
 
 
     public String getDesc() {
