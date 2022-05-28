@@ -1,27 +1,29 @@
 
+import Enemy.*;
+import Heros.IHero;
+import Heros.HeroBase;
+import Places.IPlace;
+import Places.Moria;
+import Places.PlaceBase;
+import Weapon.IWeapon;
+import Weapon.WeaponBase;
 
-import Enemy.Enemy;
-import Heros.Heros;
-import Places.Place;
-import Weapon.Weapons;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameStart {
-    public static Heros currentHero;
-    public static Heros secondaryHero;
-    public static Weapons currentWeapon;
-    public static Enemy currentEnemy;
-    public static Place currentPlace;
+    public static IHero currentHero;
+    public static IHero secondaryHero;
+    public static IWeapon currentWeapon;
+    public static IEnemy currentEnemy;
+    public static IPlace currentPlace;
     public static Scanner sc = new Scanner(System.in);
     public static boolean isRunning = true;
     public static boolean isFighting = true;
     public static Random random = new Random();
     public static String weaponDesc="";
-    public static Weapons weaponObject;
-    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
+//    public static Weapons weaponObject;
+//    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
 //    public static CreatingObjects objects = new CreatingObjects();
 
 
@@ -57,7 +59,7 @@ public class GameStart {
     }
 
     //Creating an Hero
-    public static Heros createHero() {
+    public static IHero createHero() {
         printSeparator(30);
         System.out.println("Choice your hero?" +
                 "\n(1) Mithrandir" +
@@ -70,157 +72,35 @@ public class GameStart {
                 "\n(8) Gandalf the White" +
                 "\n(9) Elrond" +
                 "\n(10) Galadriel");
-        int input = readInt(10);
-        switch (input) {
-            case 1:
-                currentHero = new Heros(Heros.HerosName.GREYGANDALF, "Gandalf the Gray", 100, 20);
-                break;
-            case 2:
-                currentHero = new Heros(Heros.HerosName.GIMLI, "Gimli", 70, 8);
-                break;
-            case 3:
-                currentHero = new Heros(Heros.HerosName.LEGOLAS, "Legolas", 80, 12);
-                break;
-            case 4:
-                currentHero = new Heros(Heros.HerosName.FRODO, "Frodo", 40, 5);
-                break;
-            case 5:
-                currentHero = new Heros(Heros.HerosName.ARAGORN, "Aragorn", 90, 18);
-                break;
-            case 6:
-                currentHero = new Heros(Heros.HerosName.STRIDER, "Strider", 80, 13);
-                break;
-            case 7:
-                currentHero = new Heros(Heros.HerosName.MITHRANDIR, "Mithrandir", 90, 16);
-                break;
-            case 8:
-                currentHero = new Heros(Heros.HerosName.WHITEGANDALF, "Gandalf the White", 110, 22);
-                break;
-            case 9:
-                currentHero = new Heros(Heros.HerosName.GALADRIEL, "Galadriel", 120, 25);
-                break;
-            case 10:
-                currentHero = new Heros(Heros.HerosName.ELROND, "Elrond", 115, 24);
-                break;
-            default:
-                System.out.println("Invalid Entry");
-
-        }
-
-        System.out.println("Your hero's is " + currentHero.getName());
+        int selectedHero = readInt(10);
+        HeroBase hero = new HeroBase();
+        currentHero = hero.createHero(selectedHero);
+        System.out.println("Your hero's is " + currentHero.getHeroName());
         GameStart.printSeparator(20);
-        weaponObject =  new Weapons();
-        currentWeapon = createWeapons();
+        createWeapon();
         return currentHero;
     }
-        //Creating random weapon
-    public  static Weapons createWeapons() {
-        int input = (random.nextInt(7) + 1);
-        switch (input) {
-            case 1:
-                weaponObject.setUpWeapons(Weapons.WeaponName.NARSIL);
-                break;
-            case 2:
-                weaponObject.setUpWeapons(Weapons.WeaponName.AXE);
-                break;
-            case 3:
-                weaponObject.setUpWeapons(Weapons.WeaponName.ELFBOW);
-                break;
-            case 4:
-                weaponObject.setUpWeapons(Weapons.WeaponName.KNIFE);
-            case 5:
-                weaponObject.setUpWeapons(Weapons.WeaponName.STING);
-                break;
-            case 6:
-                weaponObject.setUpWeapons(Weapons.WeaponName.ORCRIST);
-                break;
-            case 7:
-                weaponObject.setUpWeapons(Weapons.WeaponName.GLAMDRING);
-                break;
-            default:
-                System.out.println("Invalid Entry");
 
-        }
-        return weaponObject;
-    }
 
 
     //Creating random weapon
-    public static void createWeapon(Weapons.WeaponName weaponName) {
-        weaponDesc = currentWeapon.getWeaponDescription(weaponName);
-        currentWeapon.setUpWeapons(weaponName);
+    public static void createWeapon() {
+        WeaponBase weapon = new WeaponBase();
+        currentWeapon =weapon.createWeapon(1);
 
     }
 
     //    Creating an enemy
-    public static Enemy createEnemy(String enemyName) {
-        switch (enemyName) {
-            case "Orch":
-                currentEnemy = new Enemy(Enemy.EnemyNames.ORCH, "Orch", 8, 30, 1);
-                break;
-            case "Gollum":
-                currentEnemy = new Enemy(Enemy.EnemyNames.GOLLUM, "Gollum", 10, 40, 2);
-                break;
-            case "Troll":
-                currentEnemy = new Enemy(Enemy.EnemyNames.TROLL, "Troll", 12, 50, 3);
-                break;
-            case "Saruman":
-                currentEnemy = new Enemy(Enemy.EnemyNames.SARUMAN, "Saruman", 20, 120, 7);
-                break;
-            case "Sauron":
-                currentEnemy = new Enemy(Enemy.EnemyNames.SAURON, "Sauron", 25, 140, 20);
-                break;
-            case "Goblin":
-                currentEnemy = new Enemy(Enemy.EnemyNames.GOBLIN, "Goblin", 11, 45, 2);
-                break;
-            case "Balrog":
-                currentEnemy = new Enemy(Enemy.EnemyNames.BALROG, "Balrog", 16, 80, 5);
-                break;
-            case "Angmar":
-                currentEnemy = new Enemy(Enemy.EnemyNames.ANGMAR, "Angmar", 23, 130, 12);
-                break;
-            case "Shelop":
-                currentEnemy = new Enemy(Enemy.EnemyNames.SHELOB, "Shelop", 13, 90, 7);
-                break;
-            case "Uruk-Hai":
-                currentEnemy = new Enemy(Enemy.EnemyNames.URUKHAI, "Uruk-Hai", 15, 85, 6);
-                break;
-            case "Nazgul":
-                currentEnemy = new Enemy(Enemy.EnemyNames.NAZGUL, "Nazgul", 19, 100, 8);
-                break;
-            default:
-                System.out.println("Invalid Entry");
-
-        }
-        return currentEnemy;
+    public static IEnemy createEnemy() {
+        EnemyBase enemyBase = new EnemyBase();
+        int rd = random.nextInt(10)+1;
+        return currentEnemy = enemyBase.createEnemy(rd);
     }
 
     //Creating place list
-    public static Place createPlace(String placeName) {
-        switch (placeName) {
-            case "Shire":
-                currentPlace = new Place(Place.placeName.SHIRE, "Shire", 5);
-                break;
-            case "Moria":
-                currentPlace = new Place(Place.placeName.MORIA, "Moria", 10);
-                break;
-            case "Helms Deep":
-                currentPlace = new Place(Place.placeName.HELMSDEEP, "Helms Deep", 13);
-                break;
-            case "Isengard":
-                currentPlace = new Place(Place.placeName.ISENGARD, "Isengard", 8);
-                break;
-            case "Rivendel":
-                currentPlace = new Place(Place.placeName.RIVENDELL, "Rivendel", 6);
-                break;
-            case "Minastrith":
-                currentPlace = new Place(Place.placeName.MINASTRITH, "Minastrith", 15);
-                break;
-            default:
-                System.out.println("Invalid entry!");
-        }
-        System.out.println("You are currently at the " + currentPlace.getName());
-        return currentPlace;
+    public static IPlace createPlace(String placeName) {
+        PlaceBase placeBase = new PlaceBase();
+        return currentPlace = placeBase.createPlace(placeName);
 
     }
 
@@ -233,13 +113,14 @@ public class GameStart {
                 "\n(3) Weapon info" +
                 "\n(4) Place Info" +
                 "\n(5) Move next room" +
-                "\n(8) Exit");
+                "\n(6) Move next room" +
+                "\n(7) Exit");
     }
 
     public static void gameLoop() {
         while (isRunning) {
             showMenu();
-            int input = readInt(6);
+            int input = readInt(7);
             switch (input) {
                 case 0:
                     showMenu();
@@ -259,7 +140,10 @@ public class GameStart {
                 case 5:
                     move();
                     break;
-                case 8:
+                    case 6:
+                    move();
+                    break;
+                case 7:
                     isRunning = false;
                     break;
                 default:
@@ -268,52 +152,67 @@ public class GameStart {
             printHeading("Select the one of the option.");
         }
     }
-
+//
+    private static String getNextLocationName(int choice){
+        Set<String> entry = currentPlace.getExits().keySet();
+        return  entry.toArray()[choice].toString();
+    }
     //Player moving on place to another
     public static void move() {
         System.out.println("Your current place is " + currentPlace.getName());
         //Before moving to the another location dealing an enemy.
-        randomEncounter();
+//        randomEncounter();
         //Displaying possible moving location
-        for (int i = 0; i < currentPlace.findConnection().length; i++) {
-            System.out.println(i + 1 + ". possible location to move " + currentPlace.findConnection()[i]);
+        for (String exit : currentPlace.getExits().keySet()) {
+            System.out.println("Possible location to move " + exit);
         }
         System.out.println("Enter place to move");
-        int placeToMove = readInt(6) - 1;
+        int choice = readInt(currentPlace.getExits().size())-1;
+       String moveTo = getNextLocationName(choice);
         String placeName = currentPlace.getName();
         switch (placeName) {
             case "Shire":
-                if (currentPlace.findConnection()[placeToMove].equals(Place.placeName.MORIA)) {
-                    createPlace("Moria");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
+                for (String place : currentPlace.getExits().keySet()) {
+                    if (moveTo.equals("MORIA")){
+                        createPlace("Moria");
+                        System.out.println("You are moving at " + currentPlace.getName());
+                        printSeparator(20);
+                        break;
+                    }else if (moveTo.equals("RIVENDELL")){
+                        createPlace("Rivendell");
+                        System.out.println("You are moving at " + currentPlace.getName());
+                        printSeparator(20);
+                        break;
+                    }
                 }
                 break;
             case "Moria":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.SHIRE) {
+                for (IPlace place : currentPlace.getConnections()){
+                if (place.equals(PlaceBase.PLACENAME.SHIRE)) {
                     createPlace("Shire");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
+                } else if (place.equals(PlaceBase.PLACENAME.ISENGARD)) {
                     createPlace("Isengard");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
+                } else if (place.equals(PlaceBase.PLACENAME.HELMSDEEP)) {
                     createPlace("Helms Deep");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                }
+                }}
                 break;
             case "Helms Deep":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.RIVENDELL) {
+                for (IPlace place : currentPlace.getConnections())
+                if (place.equals(PlaceBase.PLACENAME.RIVENDELL)) {
                     createPlace("Rivendel");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.ISENGARD) {
+                } else if (place.equals(PlaceBase.PLACENAME.ISENGARD)) {
                     createPlace("Isengard");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MINASTRITH) {
+                } else if (place.equals(PlaceBase.PLACENAME.MINASTRITH)) {
                     createPlace("Minastrith");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
@@ -321,20 +220,26 @@ public class GameStart {
                 break;
             case "Isengard":
             case "Rivendel":
-                if (currentPlace.findConnection()[placeToMove] == Place.placeName.HELMSDEEP) {
+                for (IPlace place : currentPlace.getConnections()){
+                if (place.equals(PlaceBase.PLACENAME.HELMSDEEP)) {
                     createPlace("Helms Deep");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
-                } else if (currentPlace.findConnection()[placeToMove] == Place.placeName.MORIA) {
+                } else if (place.equals(PlaceBase.PLACENAME.MORIA)) {
                     createPlace("Moria");
                     System.out.println("You are moving at " + currentPlace.getName());
                     printSeparator(20);
                 }
+                }
                 break;
             case "Minastrith":
-                createPlace("Minastrith");
-                System.out.println("You are moving at " + currentPlace.getName());
-                printSeparator(20);
+                for (IPlace place : currentPlace.getConnections()) {
+                    if (place.equals(PlaceBase.PLACENAME.MINASTRITH)) {
+                    createPlace("Minastrith");
+                    System.out.println("You are moving at " + currentPlace.getName());
+                    printSeparator(20);
+                }
+                }
                 break;
         }
 
@@ -342,8 +247,11 @@ public class GameStart {
 
     //Random encounter for the player and player take a decision
     public static void randomEncounter() {
-        printHeading("What do you want about an enemy? Choice one of the following options.\n(1). Go to battle." +
-                "\n(2). Take a rest.\n(3). Grab a new Weapon.\n(4). Look Hero's the weapon inventory.");
+        printHeading("What do you want about an enemy? Choice one of the following options." +
+                "\n(1). Go to battle." +
+                "\n(2). Take a rest." +
+                "\n(3). Grab a new Weapon." +
+                "\n(4). Look Hero's the weapon inventory.");
 //User will select one of the option for the next movement.
         int encounter = readInt(3);
         //calling respective methods
@@ -370,25 +278,21 @@ public class GameStart {
 
     public static void listWeapons() {
         System.out.println("Which weapon do you want to grab?");
-        int lengthOfWeaponsList = currentWeapon.getListLength();
+        int lengthOfWeaponsList = currentPlace.getWeapons().size();
         for (int i=0;i<lengthOfWeaponsList;i++){
-            System.out.println(i+1+". "+ currentWeapon.getWeaponAtPosition(i));
+            System.out.println(i+1+". "+ currentWeapon.getWeapons().get(i));
         }
         System.out.println("Enter position to add, or enter 0 to exit.");
         int posToAdd=readInt(3)-1;
         if (posToAdd != -1){
-            currentHero.addWeaponToInventory(currentWeapon.getWeaponAtPosition(posToAdd));
-            currentPlace.removeWeaponFromPlace(currentWeapon.getWeaponAtPosition(posToAdd));
+//            currentHero.addWeaponToInventoryList(posToAdd);
+//            currentPlace.getWeapons().remove(posToAdd);
         }
     }
 
     public static void addWeaponsInInventory() {
-
         listWeapons();
-
         //Getting user weapon decision. Hero can take only 2 weapons.
-
-
     }
 
     public static void takeRest() {
@@ -398,8 +302,8 @@ public class GameStart {
     public static void battle() {
 //        currentEnemy= objects.createEnemy();
         while (isFighting) {
-            printHeading("Your enemy is " + currentEnemy.getName() + "\nEnemy's hp: " + currentEnemy.getHp() + "\nEnemy's max damage capacity: " + currentEnemy.getDamage());
-            printHeading("Your hero's name: " + currentHero.getName() + "\nYour hero's hp: " + currentHero.getHp() + "\nHero's max damage capacity: " + currentHero.getDamage());
+            printHeading("Your enemy is " + currentEnemy.getEnemyName() + "\nEnemy's hp: " + currentEnemy.getEnemyHp() + "\nEnemy's max damage capacity: " + currentEnemy.getEnemyDamage());
+            printHeading("Your hero's name: " + currentHero.getHeroName() + "\nYour hero's hp: " + currentHero.getHeroHp() + "\nHero's max damage capacity: " + currentHero.getHeroDamage());
             printHeading("Hero's current weapon is " + currentWeapon.getName() + "\nThe weapon damage capacity : " + currentWeapon.getDamage());
             printHeading("Your fighting location is :" + currentPlace.getName() + "\nThe place difficulty is : " + currentPlace.getDifficulties());
             printSeparator(20);
@@ -407,7 +311,7 @@ public class GameStart {
                     "\nWhile you were taking to decision, you must be wise and  careful." +
                     "\n(1) Fight,\n(2) Change weapon\n(3) Use Potion for healing,\n(4) Run away.\n(5) Call another Hero for the help.");
             printSeparator(20);
-            int battleDecision = readInt(3);
+            int battleDecision = readInt(5);
             switch (battleDecision) {
                 case 1 -> fight();
                 case 2 -> changeWeapon();
@@ -423,35 +327,35 @@ public class GameStart {
     public static void fight() {
         int conditionalEffect = random.nextInt(10);
         //enemy's is to starting point Hp
-        int enemyHP = currentEnemy.getHp();
+        int enemyHP = currentEnemy.getEnemyHp();
         System.out.println("Do you want to change your current weapon?\n(1) Yes.\n(2) No.");
         int weaponChange = readInt(2);
         if (weaponChange != 1) {
             //Enemy taken damage by the Hero,and Hero's damage capacity, Hero's weapon and place difficulties this damage.
-            int dmgTookEnemy = currentEnemy.getHp() - conditionalEffect - ((currentEnemy.getHp() + currentPlace.getDifficulties()) - (currentHero.getDamage() + currentWeapon.getDamage() + currentPlace.getDifficulties()));
+            int dmgTookEnemy = currentEnemy.getEnemyHp() - conditionalEffect - ((currentEnemy.getEnemyHp() + currentPlace.getDifficulties()) - (currentHero.getHeroDamage() + currentWeapon.getDamage() + currentPlace.getDifficulties()));
 
             //Hero taken damage by the Enemy and, Enemy damage capacity and place difficulties this damage
-            int dmgTookHero = currentHero.getHp() - conditionalEffect - ((currentHero.getHp() + currentPlace.getDifficulties()) - (currentEnemy.getDamage() + currentPlace.getDifficulties()));
+            int dmgTookHero = currentHero.getHeroHp() - conditionalEffect - ((currentHero.getHeroHp() + currentPlace.getDifficulties()) - (currentEnemy.getEnemyDamage() + currentPlace.getDifficulties()));
 
-            System.out.println("You took " + dmgTookHero + " damage by " + currentEnemy.getName());
-            System.out.println("Enemy took " + dmgTookEnemy + " damage by " + currentHero.getName());
+            System.out.println("You took " + dmgTookHero + " damage by " + currentEnemy.getEnemyName());
+            System.out.println("Enemy took " + dmgTookEnemy + " damage by " + currentHero.getHeroName());
 
             //setting current enemy's Hp's
-            currentEnemy.setHp(currentEnemy.getHp() - dmgTookEnemy);
+            currentEnemy.setEnemyHp(currentEnemy.getEnemyHp() - dmgTookEnemy);
 
             //Setting current an hero's Hp's
-            currentHero.setHp(currentHero.getHp() - dmgTookHero);
+            currentHero.setHeroHp(currentHero.getHeroHp() - dmgTookHero);
 
             //If hero's Hp less than 0, hero is died.
-            if (currentHero.getHp() <= 0) {
+            if (currentHero.getHeroHp() <= 0) {
                 playerDied();
             }//If enemy's HP is less than 0, Enemy was defeated.
-            else if (currentEnemy.getHp() <= 0) {
-                printHeading("You defeated " + currentEnemy.getName() + "!\nYou earned " + enemyHP / 10 + " XP from your defeated enemy.");
-                currentHero.setHp(currentHero.getHp() + enemyHP / 10);
+            else if (currentEnemy.getEnemyHp() <= 0) {
+                printHeading("You defeated " + currentEnemy.getEnemyName() + "!\nYou earned " + enemyHP / 10 + " XP from your defeated enemy.");
+                currentHero.setHeroHp(currentHero.getHeroHp() + enemyHP / 10);
                 //setting Hero's current Hp after fighting current enemy.
-                if (currentHero.getHp() > currentHero.getMaxHp()) {
-                    currentHero.setHp(currentHero.getMaxHp());
+                if (currentHero.getHeroHp() > currentHero.getHeroMaxHp()) {
+                    currentHero.setHeroHp(currentHero.getHeroMaxHp());
                 }
                 printHeading("(1) Do you want to fight again.\nDon't forget! You need more Hp for a powerful enemy.\n(2) I want to keep continue on my journey.");
                 int isFightingAgain = readInt(2);
@@ -487,13 +391,13 @@ public class GameStart {
     //If hero thinks cannot defeat this enemy, can use run away option, however while hero is trying to run away, might takes damage(s).
     public static void runAway() {
         int runAwayChance = random.nextInt(20) + 1;
-        if (runAwayChance <= currentEnemy.getHp() / 10) {
-            printHeading("You ran away from the " + currentEnemy.getName());
+        if (runAwayChance <= currentEnemy.getEnemyHp() / 10) {
+            printHeading("You ran away from the " + currentEnemy.getEnemyName());
         } else {
-            printHeading("You didn't manage to run away from the " + currentEnemy.getName());
-            currentHero.setHp(currentHero.getHp() - runAwayChance);
+            printHeading("You didn't manage to run away from the " + currentEnemy.getEnemyName());
+            currentHero.setHeroHp(currentHero.getHeroHp() - runAwayChance);
             printHeading("You took" + runAwayChance + " damage(s) while you were trying to run away");
-            if (currentHero.getHp() <= 0) {
+            if (currentHero.getHeroHp() <= 0) {
                 printHeading("After this attempt you took too much damage,\n");
                 playerDied();
             }
@@ -504,7 +408,7 @@ public class GameStart {
     // if any condition player's dead, game will be exit.Game exiting point.
     public static void playerDied() {
         printHeading("You died!");
-        printHeading("You had " + currentHero.getHp() + " on your journey. Try to earn more next time.");
+        printHeading("You had " + currentHero.getHeroHp() + " on your journey. Try to earn more next time.");
         System.out.println("Thank you!!!");
         isRunning = false;
     }
@@ -521,23 +425,23 @@ public class GameStart {
     //Getting hero's info
     public static void heroInfo() {
         printSeparator(30);
-        System.out.println("Name of Hero: " + currentHero.getName() +
-                "\nHero's Hp: " + currentHero.getHp() + "." +
-                "\nHero's Max-Hp: " + currentHero.getMaxHp() + "." +
-                "\nHero's make a damage : " + currentHero.getDamage() + ".");
+        System.out.println("Name of Hero: " + currentHero.getHeroName() +
+                "\nHero's Hp: " + currentHero.getHeroHp() + "." +
+                "\nHero's Max-Hp: " + currentHero.getHeroMaxHp() + "." +
+                "\nHero's make a damage : " + currentHero.getHeroDamage() + ".");
         printSeparator(20);
-        System.out.println(currentHero.getHeroDescription(currentHero.getName()));
+        System.out.println(currentHero.getHeroDescription());
         printSeparator(30);
     }
 
     //Getting enemy's info
     public static void enemyInfo() {
         printSeparator(30);
-        System.out.println("Name of Enemy: " + currentEnemy.getName() +
-                "\nHero's Hp: " + currentEnemy.getHp() + "." +
-                "\nHero's make a damage : " + currentEnemy.getDamage() + ".");
+        System.out.println("Name of Enemy: " + currentEnemy.getEnemyName() +
+                "\nHero's Hp: " + currentEnemy.getEnemyHp() + "." +
+                "\nHero's make a damage : " + currentEnemy.getEnemyDamage() + ".");
         printSeparator(20);
-        System.out.println(currentEnemy.getEnemyDescription(currentEnemy.getName()));
+        System.out.println(currentEnemy.getEnemyDesc());
         printSeparator(30);
     }
 
@@ -547,7 +451,7 @@ public class GameStart {
         System.out.println("Name of place is : " + currentPlace.getName() + "." +
                 "\nDifficulties is : " + currentPlace.getDifficulties());
         printSeparator(20);
-        System.out.println(currentPlace.getPlaceDescription(currentPlace.getName()));
+        System.out.println(currentPlace.getDescription());
         printSeparator(20);
     }
 
@@ -557,11 +461,10 @@ public class GameStart {
                 "\nPlease read info and follow the guidelines...");
         createHero();
         createPlace("Shire");
-        createWeapon(Weapons.WeaponName.KNIFE);
-        createEnemy("Orch");
-        System.out.println(currentWeapon.getName());
-        System.out.println(Weapons.weaponsList.size());
-        gameLoop();
+        createWeapon();
+        createEnemy();
+        System.out.println(currentPlace.getExits().get(2));
+       gameLoop();
     }
 
 

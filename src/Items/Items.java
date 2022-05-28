@@ -1,20 +1,15 @@
 package Items;
 
 
-import Heros.Heros;
-import Places.Place;
-import Weapon.Weapons;
+ import Heros.IHero;
+import Places.PlaceBase;
+import Weapon.WeaponBase;
 
 public class Items {
-    private Heros heros;
-    private Place place;
-    private Weapon.Weapons[] Weapons;
+    private IHero hero;
+    private PlaceBase.PLACENAME place;
+    private Weapon.WeaponBase Weapons;
 
-    public Items(Heros heros, Place place, Weapons[] weapons) {
-        this.place = place;
-        Weapons = weapons;
-        this.heros=heros;
-    }
 
 
 }
