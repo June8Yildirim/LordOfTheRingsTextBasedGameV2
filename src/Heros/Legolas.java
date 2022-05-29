@@ -1,12 +1,13 @@
 package Heros;
 
 import Weapon.IWeapon;
+import Weapon.Sword;
 import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Legolas  implements IHero{
+public class Legolas implements IHero {
     private String heroName;
     private HeroBase.HeroName type;
     private int heroHp;
@@ -20,6 +21,7 @@ public class Legolas  implements IHero{
         this.heroName = "Legolas";
         this.heroDamage = 12;
         this.heroHp = 80;
+        this.heroDesc = "A boyish elf. Thanks to Legolas’s skill with a bow and arrow, his kill number is consistently higher than Gimli’s. Like his dwarf friend, he is a brave and loyal member of the fellowship of the ring.";
         heroWeapons = new ArrayList<>();
     }
 
@@ -30,7 +32,7 @@ public class Legolas  implements IHero{
 
     @Override
     public int getHeroHp() {
-        return this.heroHp ;
+        return this.heroHp;
     }
 
     @Override
@@ -44,30 +46,33 @@ public class Legolas  implements IHero{
     }
 
     @Override
-    public void setHeroHp(int hp) {this.heroHp = hp;
+    public void setHeroHp(int hp) {
+        if (this.heroDamage + hp > this.heroMaxHp) {
+            this.heroDamage = this.heroMaxHp;
+        } else {
+            this.heroHp = hp;
+        }
     }
 
     @Override
     public void setHeroDamage(int damage) {
-        this.heroDamage =damage;
+        this.heroDamage = damage;
     }
+
     @Override
     public String getHeroDescription() {
-        return "A boyish elf. Thanks to Legolas’s skill with a bow and arrow, his kill number is consistently higher than Gimli’s. Like his dwarf friend, he is a brave and loyal member of the fellowship of the ring.";
+
+        return this.heroDesc;
     }
 
     @Override
     public List<IWeapon> getHerosInventory() {
-        return this.heroWeapons;
+         return this.heroWeapons;
+    }
+    @Override
+    public String toString(){
+        return this.heroName+"'s \nHp: "+this.heroHp+"\nSingle Damage: "+this.heroDamage;
     }
 
-    @Override
-    public void addWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.add(weapon);
-    }
 
-    @Override
-    public void removeWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.remove(weapon);
-    }
 }

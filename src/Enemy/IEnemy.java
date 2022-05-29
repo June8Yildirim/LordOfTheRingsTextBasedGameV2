@@ -12,6 +12,5 @@ public interface IEnemy {
     public void setEnemyHp(int hp);
     public String getEnemyDesc();
     public List<IWeapon> getEnemyInventory();
-    public void addWeaponToEnemy(IWeapon weapon);
-    public void removeWeaponToEnemy(IWeapon weapon);
+
 }

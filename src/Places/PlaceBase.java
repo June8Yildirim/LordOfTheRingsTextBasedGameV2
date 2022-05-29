@@ -53,7 +53,7 @@ public class PlaceBase {
             default:
                 System.out.println("Invalid entry!");
         }
-        System.out.println("You are currently at the " + place.getName());
+
         return place;
     }
 }

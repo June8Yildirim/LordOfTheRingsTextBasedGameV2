@@ -1,6 +1,8 @@
 package Enemy;
 
 import Weapon.IWeapon;
+import Weapon.Poison;
+import Weapon.Sword;
 import Weapon.WeaponBase;
 
 import java.util.ArrayList;
@@ -9,15 +11,19 @@ import java.util.List;
 public class Shelob implements IEnemy{
     private int enemyDamage;
     private int enemyHp;
+    private EnemyBase.EnemyNames type;
     private String enemyName;
     private int enemyXp;
     private String desc;
     private List<IWeapon> weapons;
-    public Shelob(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+
+    public Shelob () {
+        this.type = EnemyBase.EnemyNames.SHELOB;
+        this.enemyName = "Shelob";
+        this.enemyDamage = 21;
+        this.enemyHp = 90;
+        this.enemyXp = 2;
+        this.desc = "Shelob was a great Spider and the greatest offspring of Ungoliant, the primordial spider. In the Third Age she lived in Mordor and was known to feed indiscriminately, preying on the inhabitants. She was encountered by Frodo Baggins and Samwise Gamgee in their quest to destroy the One Ring.";
         this.weapons = new ArrayList<>();
     }
     @Override
@@ -42,21 +48,13 @@ public class Shelob implements IEnemy{
 
     @Override
     public String getEnemyDesc() {
-        return "Shelob was a great Spider and the greatest offspring of Ungoliant, the primordial spider. In the Third Age she lived in Mordor and was known to feed indiscriminately, preying on the inhabitants. She was encountered by Frodo Baggins and Samwise Gamgee in their quest to destroy the One Ring.";
-    }
+        return this.desc;    }
 
     @Override
     public List<IWeapon> getEnemyInventory() {
+        this.weapons.add(new Sword());
+        this.weapons.add(new Poison());
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-        weapons.add(weapon);
-    }
-
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-        weapons.remove(weapon);
-    }
 }

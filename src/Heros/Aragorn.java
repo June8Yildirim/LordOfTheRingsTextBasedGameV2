@@ -1,11 +1,12 @@
 package Heros;
 
 import Weapon.IWeapon;
+import Weapon.Sword;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aragorn implements IHero{
+public class Aragorn implements IHero {
     private String heroName;
     private int heroHp;
     private HeroBase.HeroName type;
@@ -19,8 +20,10 @@ public class Aragorn implements IHero{
         this.heroName = "Aragorn";
         this.heroDamage = 18;
         this.heroHp = 90;
+        this.heroDesc = "The heir to the throne of Gondor. Though Aragorn is the rightful king of Gondor, he travels under an assumed identity at the beginning of the trilogy: he is a ranger, known as Strider. The fact that he is not upon the throne reveals the weak state of the kingdoms of men. As the trilogy proceeds, Aragorn shows himself to be a noble leader with a pure heart. He is relatively unaffected by desire for the ring and routinely throws himself in harm’s way to ensure the fellowship’s survival. In love with the elf princess Arwen, he fights for her survival and for the successful return of the ring to Mordor. He becomes increasingly comfortable asserting his royal identity, but only when he addresses the men of the mountain in The Return of the King does he actually declare himself king of Gondor. By the time he is crowned king at the end of the final film, he has proven himself to be a worthy leader.";
         this.heroWeapons = new ArrayList<>();
     }
+
 
     @Override
     public String getHeroName() {
@@ -29,7 +32,7 @@ public class Aragorn implements IHero{
 
     @Override
     public int getHeroHp() {
-        return this.heroHp ;
+        return this.heroHp;
     }
 
     @Override
@@ -43,30 +46,34 @@ public class Aragorn implements IHero{
     }
 
     @Override
-    public void setHeroHp(int hp) {this.heroHp = hp;
+    public void setHeroHp(int hp) {
+        if (this.heroDamage + hp > this.heroMaxHp) {
+            this.heroDamage = this.heroMaxHp;
+        } else {
+            this.heroHp = hp;
+        }
     }
 
     @Override
     public void setHeroDamage(int damage) {
-        this.heroDamage =damage;
+        this.heroDamage = damage;
     }
+
+
     @Override
     public String getHeroDescription() {
-        return "The heir to the throne of Gondor. Though Aragorn is the rightful king of Gondor, he travels under an assumed identity at the beginning of the trilogy: he is a ranger, known as Strider. The fact that he is not upon the throne reveals the weak state of the kingdoms of men. As the trilogy proceeds, Aragorn shows himself to be a noble leader with a pure heart. He is relatively unaffected by desire for the ring and routinely throws himself in harm’s way to ensure the fellowship’s survival. In love with the elf princess Arwen, he fights for her survival and for the successful return of the ring to Mordor. He becomes increasingly comfortable asserting his royal identity, but only when he addresses the men of the mountain in The Return of the King does he actually declare himself king of Gondor. By the time he is crowned king at the end of the final film, he has proven himself to be a worthy leader.";
+        return this.heroDesc;
     }
 
     @Override
     public List<IWeapon> getHerosInventory() {
-        return this.heroWeapons;
+         return this.heroWeapons;
     }
 
     @Override
-    public void addWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.add(weapon);
+    public String toString() {
+        return this.heroName + "'s \nHp: " + this.heroHp + "\nSingle Damage: " + this.heroDamage;
     }
 
-    @Override
-    public void removeWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.remove(weapon);
-    }
+
 }

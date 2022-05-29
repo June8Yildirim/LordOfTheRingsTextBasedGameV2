@@ -1,8 +1,7 @@
 package Places;
 
-import Weapon.IWeapon;
-import Weapon.Sting;
-import Weapon.WeaponBase;
+import Enemy.*;
+import Weapon.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,7 @@ public class Shire implements IPlace{
     private PlaceBase.PLACENAME type;
     private int difficulties;
     private String Name;
-    private List<IPlace> getConnection;
+    private List<IEnemy> enemies;
     private List<IWeapon> placeWeapons;
     private Map<String, Integer> connections;
     private int locId;
@@ -28,11 +27,14 @@ public class Shire implements IPlace{
         }
         this.difficulties = 5;
         this.Name = "Shire";
+        this.desc = "Located in the northwest of Middle-earth, the Shire is a loosely organized territory in which most of Middle-earth's hobbits live. It is a bucolic, agricultural land that has seen little of the evil growing to the east. The Baggins family home of Bag End is in Hobbiton, a large town in the western farthing, or district, of the Shire.";
         this.type = PlaceBase.PLACENAME.SHIRE;
-        this.getConnection = new ArrayList<>();
-//        this.getConnection.add(new Moria());
+        this.enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();
-        this.placeWeapons.add(new Sting());
+        this.placeWeapons.add(new Sword());
+        this.placeWeapons.add(new Axe());
+        this.placeWeapons.add(new Knife());
+        this.placeWeapons.add(new Spears());
     }
 
 
@@ -57,14 +59,17 @@ public class Shire implements IPlace{
     }
 
     @Override
-    public List<IPlace> getConnections() {
-        return this.getConnection;
+    public List<IEnemy> getEnemies() {
+        this.enemies.add(new Goblin());
+        this.enemies.add(new Troll());
+        this.enemies.add(new Orch());
+        this.enemies.add(new Nazgul());
+        return this.enemies;
     }
 
     @Override
     public String getDescription() {
-        return  "Located in the northwest of Middle-earth, the Shire is a loosely organized territory in which most of Middle-earth's hobbits live. It is a bucolic, agricultural land that has seen little of the evil growing to the east. The Baggins family home of Bag End is in Hobbiton, a large town in the western farthing, or district, of the Shire.";
-    }
+        return  this.desc;    }
 
     @Override
     public Map<String, Integer> getExits() {

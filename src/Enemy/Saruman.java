@@ -1,7 +1,6 @@
 package Enemy;
 
-import Weapon.IWeapon;
-import Weapon.WeaponBase;
+import Weapon.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +8,19 @@ import java.util.List;
 public class Saruman implements IEnemy {
     private int enemyDamage;
     private int enemyHp;
+    private EnemyBase.EnemyNames type;
     private String enemyName;
     private int enemyXp;
     private String desc;
     private List<IWeapon> weapons;
 
-    public Saruman(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+    public Saruman() {
+        this.type = EnemyBase.EnemyNames.SARUMAN;
+        this.enemyName = "Saruman";
+        this.enemyDamage = 25;
+        this.enemyHp = 110;
+        this.enemyXp = 3;
+        this.desc = "A wizard who joins forces with Sauron. A former friend of Gandalf, Saruman has been tempted by evil and has allied with Sauron. At his mighty tower, Orthanc, he creates countless Uruk-hai, monsters that terrorize Middle-earth.";
         weapons  = new ArrayList<>();
     }
 
@@ -44,21 +46,15 @@ public class Saruman implements IEnemy {
 
     @Override
     public String getEnemyDesc() {
-        return "A wizard who joins forces with Sauron. A former friend of Gandalf, Saruman has been tempted by evil and has allied with Sauron. At his mighty tower, Orthanc, he creates countless Uruk-hai, monsters that terrorize Middle-earth.";
+        return this.desc;
     }
 
     @Override
     public List<IWeapon> getEnemyInventory() {
+        this.weapons.add(new Spell());
+        this.weapons.add(new Sword());
+        this.weapons.add(new Stuff());
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-        weapons.add(weapon);
-    }
-
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-        weapons.remove(weapon);
-    }
 }

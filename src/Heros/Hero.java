@@ -62,13 +62,5 @@ public class Hero implements IHero{
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToInventoryList(IWeapon weapon) {
 
-    }
-
-    @Override
-    public void removeWeaponToInventoryList(IWeapon weapon) {
-
-    }
 }

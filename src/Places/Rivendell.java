@@ -1,9 +1,7 @@
 package Places;
 
-import Weapon.Elfbow;
-import Weapon.ElrondRing;
-import Weapon.IWeapon;
-import Weapon.WeaponBase;
+import Enemy.*;
+import Weapon.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ public class Rivendell implements IPlace{
     private PlaceBase.PLACENAME type;
     private int difficulties;
     private String Name;
-    private List<IPlace> getConnection;
+    private List<IEnemy> enemies;
     private List<IWeapon> placeWeapons;
 
 
@@ -22,12 +20,13 @@ public class Rivendell implements IPlace{
         this.difficulties = 6;
         this.Name = "Rivendel";
         this.type = PlaceBase.PLACENAME.RIVENDELL;
-        getConnection = new ArrayList<>();
-//        this.getConnection.add(new HelmsDeep());
-//        this.getConnection.add(new Moria());
+        this.enemies = new ArrayList<>();
+        this.desc ="Imladris, known to men as Rivendell, is Elrond Halfelven's refuge in the western reaches of the Misty Mountains. Bilbo Baggins visits during the Quest of Erebor (2941), and later takes up residence there. In 3018 Frodo Baggins reaches Rivendell with the One Ring and the council of Elrond creates the Fellowship of the Ring.";
         this.placeWeapons = new ArrayList<>();
         this.placeWeapons.add(new Elfbow());
         this.placeWeapons.add(new ElrondRing());
+        this.placeWeapons.add(new Sting());
+        this.placeWeapons.add(new Anduril());
 
     }
     @Override
@@ -51,14 +50,19 @@ public class Rivendell implements IPlace{
     }
 
     @Override
-    public List<IPlace> getConnections() {
-        return this.getConnection;
+    public List<IEnemy> getEnemies() {
+        this.enemies.add(new Uruk_Hai());
+        this.enemies.add(new Goblin());
+        this.enemies.add(new Orch());
+        this.enemies.add(new Gollum());
+        this.enemies.add(new Troll());
+        return this.enemies;
     }
+
 
     @Override
     public String getDescription() {
-        return "Imladris, known to men as Rivendell, is Elrond Halfelven's refuge in the western reaches of the Misty Mountains. Bilbo Baggins visits during the Quest of Erebor (2941), and later takes up residence there. In 3018 Frodo Baggins reaches Rivendell with the One Ring and the council of Elrond creates the Fellowship of the Ring.";
-    }
+        return this.desc;    }
 
     @Override
     public Map<String, Integer> getExits() {

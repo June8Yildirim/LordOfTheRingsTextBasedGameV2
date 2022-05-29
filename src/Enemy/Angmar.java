@@ -1,7 +1,7 @@
 package Enemy;
 
 import Weapon.IWeapon;
-import Weapon.WeaponBase;
+import Weapon.MorgulBlade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +9,20 @@ import java.util.List;
 public class Angmar implements IEnemy{
 
     private int enemyDamage;
+    private EnemyBase.EnemyNames type;
     private int enemyHp;
     private String enemyName;
     private int enemyXp;
     private String desc;
     private List<IWeapon> weapons;
 
-    public Angmar(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+    public Angmar() {
+        this.type = EnemyBase.EnemyNames.ANGMAR;
+        this.enemyName = "Angmar";
+        this.enemyDamage = 24;
+        this.enemyHp = 120;
+        this.enemyXp = 4;
+        this.desc = "One of Sauron’s most feared warriors. Unable to be killed by men, the witch-king is eventually felled by Éowyn, a woman, with the help of Merry, a hobbit. ";
         weapons =  new ArrayList<>();
     }
     @Override
@@ -44,21 +47,12 @@ public class Angmar implements IEnemy{
 
     @Override
     public String getEnemyDesc() {
-        return "One of Sauron’s most feared warriors. Unable to be killed by men, the witch-king is eventually felled by Éowyn, a woman, with the help of Merry, a hobbit. ";
-    }
+        return this.desc;    }
 
     @Override
     public List<IWeapon> getEnemyInventory() {
+        this.weapons.add(new MorgulBlade());
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-
-    }
-
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-
-    }
 }

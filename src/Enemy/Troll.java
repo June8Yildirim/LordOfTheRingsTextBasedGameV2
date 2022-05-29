@@ -1,6 +1,8 @@
 package Enemy;
 
+import Weapon.Axe;
 import Weapon.IWeapon;
+import Weapon.Sword;
 import Weapon.WeaponBase;
 
 import java.util.ArrayList;
@@ -14,12 +16,13 @@ public class Troll implements IEnemy {
     private String desc;
     private List<IWeapon> weapons;
 
-    public Troll(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+    public Troll() {
+        this.enemyName = "Troll";
+        this.enemyDamage = 12;
+        this.enemyHp = 50;
+        this.enemyXp = 1;
         this.weapons = new ArrayList<>();
+        this.desc = "Stone-trolls tended to be dumb and ill-tempered. Stone-trolls ate things such as wild fowl, wild pigs/boars, dwarves, hobbits, and fish (if they could actually catch them). They hunted simply by chasing or ambushing the animals, then hitting them with a weapon such as an axe or a club.";
     }
     @Override
     public String getEnemyName() {
@@ -43,21 +46,13 @@ public class Troll implements IEnemy {
 
     @Override
     public String getEnemyDesc() {
-        return "Stone-trolls tended to be dumb and ill-tempered. Stone-trolls ate things such as wild fowl, wild pigs/boars, dwarves, hobbits, and fish (if they could actually catch them). They hunted simply by chasing or ambushing the animals, then hitting them with a weapon such as an axe or a club. ";
-    }
+        return this.desc;    }
 
     @Override
     public List<IWeapon> getEnemyInventory() {
+        this.weapons.add(new Axe());
+        this.weapons.add(new Sword());
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-        weapons.add(weapon);
-    }
-
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-        weapons.remove(weapon);
-    }
 }

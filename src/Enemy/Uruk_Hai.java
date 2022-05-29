@@ -2,24 +2,27 @@ package Enemy;
 
 
 import Weapon.IWeapon;
-import Weapon.WeaponBase;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Uruk_Hai implements IEnemy{
     private int enemyDamage;
+    private EnemyBase.EnemyNames type;
     private int enemyHp;
     private String enemyName;
     private int enemyXp;
     private String desc;
     private List<IWeapon> weapons;
 
-    public Uruk_Hai(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+    public Uruk_Hai() {
+        this.enemyName = "UrukHai";
+        this.enemyDamage = 15;
+        this.enemyHp = 85 ;
+        this.enemyXp = 2;
+        this.desc = "Uruk-hai (for short, Uruks) were brutal warriors of Middle-earth, and the strongest Orcs, who dwelt in Mordor and Isengard." +
+                "In The Lord of the Rings, the term Uruk-hai refers chiefly to those bred in Isengard, and in one context are alternatively called Isengarders, while Uruks from Mordor are called Black Uruks or Uruks of Mordor. ";
         this.weapons =new ArrayList<>();
     }
 
@@ -45,8 +48,7 @@ public class Uruk_Hai implements IEnemy{
 
     @Override
     public String getEnemyDesc() {
-        return "Uruk-hai (for short, Uruks) were brutal warriors of Middle-earth, and the strongest Orcs, who dwelt in Mordor and Isengard." +
-                "In The Lord of the Rings, the term Uruk-hai refers chiefly to those bred in Isengard, and in one context are alternatively called Isengarders, while Uruks from Mordor are called Black Uruks or Uruks of Mordor. ";
+        return this.desc;
     }
 
     @Override
@@ -54,13 +56,4 @@ public class Uruk_Hai implements IEnemy{
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-        weapons.add(weapon);
-    }
-
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-        weapons.remove(weapon);
-    }
 }

@@ -12,6 +12,7 @@ public class Knife implements IWeapon{
     public Knife() {
         this.weaponName = "Knife";
         this.weaponDamage =8;
+        this.weaponDesc = "Knife";
         weapons = new ArrayList<>();
     }
 
@@ -23,7 +24,7 @@ public class Knife implements IWeapon{
 
     @Override
     public String getWeaponDescription() {
-        return null;
+        return this.weaponDesc;
     }
 
 
@@ -35,6 +36,9 @@ public class Knife implements IWeapon{
     @Override
     public List<IWeapon> getWeapons() {
         return this.weapons;
+    }     @Override
+    public String toString(){
+        return this.weaponName+"'s: "+"\nSingle Damage: "+this.weaponDamage;
     }
 
 }

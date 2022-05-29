@@ -11,7 +11,9 @@ public class GandalfStaff implements IWeapon {
 
     public GandalfStaff() {
         this.weaponName = "Gandalf Staff";
-        this.weaponDamage =18;
+        this.weaponDamage = 18;
+        this.weaponDesc = "Gandalf had two staffs. The first was made of gnarled wood and cradled a jewel at the top that would light up. His second staff was white with a slightly more geometric design." +
+                "History: When he returned from the dead, Galadriel gave Gandalf a new white staff. In the films, his white staff was shattered by the Witch King in Minas Tirith.";
         weapons = new ArrayList<>();
     }
 
@@ -23,8 +25,7 @@ public class GandalfStaff implements IWeapon {
 
     @Override
     public String getWeaponDescription() {
-        return "Gandalf had two staffs. The first was made of gnarled wood and cradled a jewel at the top that would light up. His second staff was white with a slightly more geometric design." +
-                "History: When he returned from the dead, Galadriel gave Gandalf a new white staff. In the films, his white staff was shattered by the Witch King in Minas Tirith.";
+        return this.weaponDesc;
     }
 
     @Override
@@ -35,5 +36,10 @@ public class GandalfStaff implements IWeapon {
     @Override
     public List<IWeapon> getWeapons() {
         return this.weapons;
+    }
+
+    @Override
+    public String toString() {
+        return this.weaponName + "'s: " + "\nSingle Damage: " + this.weaponDamage;
     }
 }

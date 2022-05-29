@@ -1,5 +1,9 @@
 package Places;
 
+import Enemy.IEnemy;
+import Enemy.Saruman;
+import Enemy.Troll;
+import Enemy.Uruk_Hai;
 import Weapon.GandalfStaff;
 import Weapon.Glamdring;
 import Weapon.IWeapon;
@@ -14,18 +18,16 @@ public class Isengard implements IPlace{
     private PlaceBase.PLACENAME type;
     private int difficulties;
     private String Name;
-    private List<IPlace> getConnection;
+    private List<IEnemy> enemies;
     private List<IWeapon> placeWeapons;
 
     public Isengard() {
         this.difficulties = 8;
+        this.description = "An extremely defensible fortress in Rohan built by the Númenoreans ages before the War of the Ring takes place. Saruman took up residence there at the invitation of the king of Rohan. He fortified it further and built an army of orcs. From Orthanc, Isengard's 500-foot-tall tower of unbreakable stone, Saruman seeks the One Ring for himself.";
         this.Name = "Isengard";
         this.type = PlaceBase.PLACENAME.ISENGARD;
-        getConnection = new ArrayList<>();
-//        this.getConnection.add(new HelmsDeep());
-//        this.getConnection.add(new Moria());
+        enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();
-        this.placeWeapons.add(new Glamdring());
         this.placeWeapons.add(new GandalfStaff());
 
     }
@@ -50,13 +52,17 @@ public class Isengard implements IPlace{
     }
 
     @Override
-    public List<IPlace> getConnections() {
-        return this.getConnection;
+    public List<IEnemy> getEnemies() {
+        enemies.add(new Saruman());
+        enemies.add(new Troll());
+        enemies.add(new Uruk_Hai());
+        return this.enemies;
     }
+
 
     @Override
     public String getDescription() {
-        return "An extremely defensible fortress in Rohan built by the Númenoreans ages before the War of the Ring takes place. Saruman took up residence there at the invitation of the king of Rohan. He fortified it further and built an army of orcs. From Orthanc, Isengard's 500-foot-tall tower of unbreakable stone, Saruman seeks the One Ring for himself.";
+        return this.description;
     }
 
     @Override

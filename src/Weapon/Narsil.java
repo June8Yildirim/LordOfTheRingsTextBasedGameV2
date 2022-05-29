@@ -12,6 +12,8 @@ public class Narsil implements IWeapon{
     public Narsil() {
         this.weaponName = "Narsil";
         this.weaponDamage =17;
+        this.weaponDesc = " Reforged from the shards of Isildur’s sword, Narsil, Andúril bears the inscription, \"I am Andúril, who was Narsil, the sword of Elendil. Let the thralls of Mordor flee me." +
+                "History: After Isildur used the broken Narsil to cut the Ring off Sauron’s finger, the sword’s shards were housed in Rivendell. They were reforged years later for Isildur’s heir, Aragorn, who repeatedly flashed the sword to establish his identity as the rightful king of Gondor.";
         weapons = new ArrayList<>();
     }
 
@@ -21,9 +23,7 @@ public class Narsil implements IWeapon{
     }
     @Override
     public String getWeaponDescription() {
-        return " Reforged from the shards of Isildur’s sword, Narsil, Andúril bears the inscription, \"I am Andúril, who was Narsil, the sword of Elendil. Let the thralls of Mordor flee me." +
-                "History: After Isildur used the broken Narsil to cut the Ring off Sauron’s finger, the sword’s shards were housed in Rivendell. They were reforged years later for Isildur’s heir, Aragorn, who repeatedly flashed the sword to establish his identity as the rightful king of Gondor.";
-    }
+        return this.weaponDesc;}
 
 
     @Override
@@ -34,5 +34,8 @@ public class Narsil implements IWeapon{
     @Override
     public List<IWeapon> getWeapons() {
         return this.weapons;
+    }     @Override
+    public String toString(){
+        return this.weaponName+"'s: "+"\nSingle Damage: "+this.weaponDamage;
     }
 }

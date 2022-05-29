@@ -3,7 +3,6 @@ import Enemy.*;
 import Heros.IHero;
 import Heros.HeroBase;
 import Places.IPlace;
-import Places.Moria;
 import Places.PlaceBase;
 import Weapon.IWeapon;
 import Weapon.WeaponBase;
@@ -14,6 +13,7 @@ import java.util.*;
 public class GameStart {
     public static IHero currentHero;
     public static IHero secondaryHero;
+    public static IWeapon primaryWeapon;
     public static IWeapon currentWeapon;
     public static IEnemy currentEnemy;
     public static IPlace currentPlace;
@@ -21,10 +21,6 @@ public class GameStart {
     public static boolean isRunning = true;
     public static boolean isFighting = true;
     public static Random random = new Random();
-    public static String weaponDesc="";
-//    public static Weapons weaponObject;
-//    public static ArrayList<Weapons> weaponsList = new ArrayList<>();
-//    public static CreatingObjects objects = new CreatingObjects();
 
 
     //Print necessary String
@@ -76,8 +72,13 @@ public class GameStart {
         HeroBase hero = new HeroBase();
         currentHero = hero.createHero(selectedHero);
         System.out.println("Your hero's is " + currentHero.getHeroName());
+
         GameStart.printSeparator(20);
         createWeapon();
+        primaryWeapon = currentWeapon;
+        currentHero.getHerosInventory().add(primaryWeapon);
+        System.out.println("Primary weapon is :" + primaryWeapon);
+        System.out.println("Current weapon is :" + currentHero.getHerosInventory().toString());
         return currentHero;
     }
 
@@ -87,21 +88,18 @@ public class GameStart {
     public static void createWeapon() {
         WeaponBase weapon = new WeaponBase();
         currentWeapon =weapon.createWeapon(1);
-
     }
 
     //    Creating an enemy
     public static IEnemy createEnemy() {
-        EnemyBase enemyBase = new EnemyBase();
-        int rd = random.nextInt(10)+1;
-        return currentEnemy = enemyBase.createEnemy(rd);
+        int randomEnemy = random.nextInt(currentPlace.getEnemies().size());
+        return currentEnemy = currentPlace.getEnemies().get(randomEnemy);
     }
 
     //Creating place list
     public static IPlace createPlace(String placeName) {
         PlaceBase placeBase = new PlaceBase();
         return currentPlace = placeBase.createPlace(placeName);
-
     }
 
     public static void showMenu() {
@@ -113,7 +111,7 @@ public class GameStart {
                 "\n(3) Weapon info" +
                 "\n(4) Place Info" +
                 "\n(5) Move next room" +
-                "\n(6) Move next room" +
+                "\n(6) Random Encounter" +
                 "\n(7) Exit");
     }
 
@@ -141,7 +139,7 @@ public class GameStart {
                     move();
                     break;
                     case 6:
-                    move();
+                    randomEncounter();
                     break;
                 case 7:
                     isRunning = false;
@@ -152,97 +150,31 @@ public class GameStart {
             printHeading("Select the one of the option.");
         }
     }
-//
+
     private static String getNextLocationName(int choice){
         Set<String> entry = currentPlace.getExits().keySet();
         return  entry.toArray()[choice].toString();
     }
+
     //Player moving on place to another
     public static void move() {
         System.out.println("Your current place is " + currentPlace.getName());
         //Before moving to the another location dealing an enemy.
+
 //        randomEncounter();
+
         //Displaying possible moving location
         for (String exit : currentPlace.getExits().keySet()) {
             System.out.println("Possible location to move " + exit);
         }
         System.out.println("Enter place to move");
         int choice = readInt(currentPlace.getExits().size())-1;
-       String moveTo = getNextLocationName(choice);
+        String moveTo = getNextLocationName(choice);
         String placeName = currentPlace.getName();
-        switch (placeName) {
-            case "Shire":
-                for (String place : currentPlace.getExits().keySet()) {
-                    if (moveTo.equals("MORIA")){
-                        createPlace("Moria");
-                        System.out.println("You are moving at " + currentPlace.getName());
-                        printSeparator(20);
-                        break;
-                    }else if (moveTo.equals("RIVENDELL")){
-                        createPlace("Rivendell");
-                        System.out.println("You are moving at " + currentPlace.getName());
-                        printSeparator(20);
-                        break;
-                    }
-                }
-                break;
-            case "Moria":
-                for (IPlace place : currentPlace.getConnections()){
-                if (place.equals(PlaceBase.PLACENAME.SHIRE)) {
-                    createPlace("Shire");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (place.equals(PlaceBase.PLACENAME.ISENGARD)) {
-                    createPlace("Isengard");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (place.equals(PlaceBase.PLACENAME.HELMSDEEP)) {
-                    createPlace("Helms Deep");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }}
-                break;
-            case "Helms Deep":
-                for (IPlace place : currentPlace.getConnections())
-                if (place.equals(PlaceBase.PLACENAME.RIVENDELL)) {
-                    createPlace("Rivendel");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (place.equals(PlaceBase.PLACENAME.ISENGARD)) {
-                    createPlace("Isengard");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (place.equals(PlaceBase.PLACENAME.MINASTRITH)) {
-                    createPlace("Minastrith");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                break;
-            case "Isengard":
-            case "Rivendel":
-                for (IPlace place : currentPlace.getConnections()){
-                if (place.equals(PlaceBase.PLACENAME.HELMSDEEP)) {
-                    createPlace("Helms Deep");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                } else if (place.equals(PlaceBase.PLACENAME.MORIA)) {
-                    createPlace("Moria");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                }
-                break;
-            case "Minastrith":
-                for (IPlace place : currentPlace.getConnections()) {
-                    if (place.equals(PlaceBase.PLACENAME.MINASTRITH)) {
-                    createPlace("Minastrith");
-                    System.out.println("You are moving at " + currentPlace.getName());
-                    printSeparator(20);
-                }
-                }
-                break;
-        }
 
+        MoveToPlace moveToPlace  = new MoveToPlace(currentPlace,placeName,moveTo);
+        moveToPlace.move();
+        System.out.println("The current place is  "+currentPlace.getName());
     }
 
     //Random encounter for the player and player take a decision
@@ -251,19 +183,31 @@ public class GameStart {
                 "\n(1). Go to battle." +
                 "\n(2). Take a rest." +
                 "\n(3). Grab a new Weapon." +
-                "\n(4). Look Hero's the weapon inventory.");
-//User will select one of the option for the next movement.
-        int encounter = readInt(3);
+                "\n(4).Change a primary weapon." +
+                "\n(5). Look Hero's the weapon inventory.");
+        //User will select one of the option for the next movement.
+        int encounter = readInt(4);
         //calling respective methods
         switch (encounter) {
             case 1 -> battle();
             case 2 -> takeRest();
             case 3 -> addWeaponsInInventory();
-            case 4 -> lookInventory();
+            case 4 -> changePrimaryWeapon();
+            case 5 -> lookInventory();
         }
     }
 
-
+    public static void changePrimaryWeapon(){
+        System.out.println("Your primary weapon is "+ primaryWeapon);
+        int count =1;
+        printHeading("Your weapon inventory list are. Select one of the weapon");
+         for (IWeapon weapon : currentHero.getHerosInventory()){
+             System.out.println(weapon);
+         }
+         int choice = readInt(currentHero.getHerosInventory().size())-1;
+         primaryWeapon = currentHero.getHerosInventory().get(choice);
+        System.out.println("Your primary weapon is "+ primaryWeapon);
+    }
     public static void lookInventory() {
         for (int i = 0; i < currentHero.getHerosInventory().size(); i++) {
             System.out.println(i + 1 + ". weapon " + currentHero.getHerosInventory().get(i));
@@ -273,26 +217,23 @@ public class GameStart {
     public static void callAnotherHero() {
         System.out.println("Which want to call help?");
         secondaryHero = createHero();
-
-    }
-
-    public static void listWeapons() {
-        System.out.println("Which weapon do you want to grab?");
-        int lengthOfWeaponsList = currentPlace.getWeapons().size();
-        for (int i=0;i<lengthOfWeaponsList;i++){
-            System.out.println(i+1+". "+ currentWeapon.getWeapons().get(i));
-        }
-        System.out.println("Enter position to add, or enter 0 to exit.");
-        int posToAdd=readInt(3)-1;
-        if (posToAdd != -1){
-//            currentHero.addWeaponToInventoryList(posToAdd);
-//            currentPlace.getWeapons().remove(posToAdd);
-        }
     }
 
     public static void addWeaponsInInventory() {
-        listWeapons();
         //Getting user weapon decision. Hero can take only 2 weapons.
+        System.out.println("Which weapon do you want to grab?");
+        int count =1;
+        for (IWeapon weapon : currentPlace.getWeapons()){
+            System.out.println(count++ +". "+weapon.getName());
+        }
+        System.out.println("Enter position to add, or enter 0 to exit.");
+        int posToAdd=readInt(currentPlace.getWeapons().size())-1;
+        currentHero.getHerosInventory().add(currentPlace.getWeapons().get(posToAdd));
+        currentPlace.getWeapons().remove(posToAdd);
+
+        for (IWeapon weapon : currentHero.getHerosInventory()){
+            System.out.println(weapon);
+        }
     }
 
     public static void takeRest() {
@@ -302,11 +243,7 @@ public class GameStart {
     public static void battle() {
 //        currentEnemy= objects.createEnemy();
         while (isFighting) {
-            printHeading("Your enemy is " + currentEnemy.getEnemyName() + "\nEnemy's hp: " + currentEnemy.getEnemyHp() + "\nEnemy's max damage capacity: " + currentEnemy.getEnemyDamage());
-            printHeading("Your hero's name: " + currentHero.getHeroName() + "\nYour hero's hp: " + currentHero.getHeroHp() + "\nHero's max damage capacity: " + currentHero.getHeroDamage());
-            printHeading("Hero's current weapon is " + currentWeapon.getName() + "\nThe weapon damage capacity : " + currentWeapon.getDamage());
-            printHeading("Your fighting location is :" + currentPlace.getName() + "\nThe place difficulty is : " + currentPlace.getDifficulties());
-            printSeparator(20);
+
             System.out.println("What's your decision about this enemy." +
                     "\nWhile you were taking to decision, you must be wise and  careful." +
                     "\n(1) Fight,\n(2) Change weapon\n(3) Use Potion for healing,\n(4) Run away.\n(5) Call another Hero for the help.");
@@ -318,57 +255,24 @@ public class GameStart {
                 case 3 -> usePotion();
                 case 4 -> runAway();
                 case 5 -> callAnotherHero();
+                case 6-> displayHealthConditions();
             }
         }
     }
 
+    public static void displayHealthConditions(){
+        printHeading("Your enemy is " + currentEnemy.getEnemyName() + "\nEnemy's hp: " + currentEnemy.getEnemyHp() + "\nEnemy's max damage capacity: " + currentEnemy.getEnemyDamage());
+        printHeading("Your hero's name: " + currentHero.getHeroName() + "\nYour hero's hp: " + currentHero.getHeroHp() + "\nHero's max damage capacity: " + currentHero.getHeroDamage());
+        printHeading("Hero's current weapon is " + currentWeapon.getName() + "\nThe weapon damage capacity : " + currentWeapon.getDamage());
+        printHeading("Your fighting location is :" + currentPlace.getName() + "\nThe place difficulty is : " + currentPlace.getDifficulties());
+        printSeparator(20);
+    }
 
     // fighting for the current enemy.
     public static void fight() {
-        int conditionalEffect = random.nextInt(10);
-        //enemy's is to starting point Hp
-        int enemyHP = currentEnemy.getEnemyHp();
-        System.out.println("Do you want to change your current weapon?\n(1) Yes.\n(2) No.");
-        int weaponChange = readInt(2);
-        if (weaponChange != 1) {
-            //Enemy taken damage by the Hero,and Hero's damage capacity, Hero's weapon and place difficulties this damage.
-            int dmgTookEnemy = currentEnemy.getEnemyHp() - conditionalEffect - ((currentEnemy.getEnemyHp() + currentPlace.getDifficulties()) - (currentHero.getHeroDamage() + currentWeapon.getDamage() + currentPlace.getDifficulties()));
-
-            //Hero taken damage by the Enemy and, Enemy damage capacity and place difficulties this damage
-            int dmgTookHero = currentHero.getHeroHp() - conditionalEffect - ((currentHero.getHeroHp() + currentPlace.getDifficulties()) - (currentEnemy.getEnemyDamage() + currentPlace.getDifficulties()));
-
-            System.out.println("You took " + dmgTookHero + " damage by " + currentEnemy.getEnemyName());
-            System.out.println("Enemy took " + dmgTookEnemy + " damage by " + currentHero.getHeroName());
-
-            //setting current enemy's Hp's
-            currentEnemy.setEnemyHp(currentEnemy.getEnemyHp() - dmgTookEnemy);
-
-            //Setting current an hero's Hp's
-            currentHero.setHeroHp(currentHero.getHeroHp() - dmgTookHero);
-
-            //If hero's Hp less than 0, hero is died.
-            if (currentHero.getHeroHp() <= 0) {
-                playerDied();
-            }//If enemy's HP is less than 0, Enemy was defeated.
-            else if (currentEnemy.getEnemyHp() <= 0) {
-                printHeading("You defeated " + currentEnemy.getEnemyName() + "!\nYou earned " + enemyHP / 10 + " XP from your defeated enemy.");
-                currentHero.setHeroHp(currentHero.getHeroHp() + enemyHP / 10);
-                //setting Hero's current Hp after fighting current enemy.
-                if (currentHero.getHeroHp() > currentHero.getHeroMaxHp()) {
-                    currentHero.setHeroHp(currentHero.getHeroMaxHp());
-                }
-                printHeading("(1) Do you want to fight again.\nDon't forget! You need more Hp for a powerful enemy.\n(2) I want to keep continue on my journey.");
-                int isFightingAgain = readInt(2);
-                if (isFightingAgain == 1) {
-                    battle();
-                } else {
-                    //finishing battle loop.
-                    isFighting = false;
-                }
-            }
-        } else {
-            changeWeapon();
-        }
+        displayHealthConditions();
+        EncounterEnemy encounter = new EncounterEnemy(currentHero,currentWeapon,currentEnemy,currentPlace);
+        encounter.encounterFight();
     }
 
     //Change hero's weapon in his inventory
@@ -377,7 +281,11 @@ public class GameStart {
         System.out.println("Currently you are " + currentPlace.getName() + "." +
                 "\nIn your location there is/(are) some weapons.");
         //Doesn't finish yet Look very closely.
-        System.out.println("(1). ");
+        for (IWeapon weapon : currentPlace.getWeapons()){
+            System.out.println("1. "+ weapon);
+        }
+        System.out.println("Select a weapon from your list.");
+        int choice = readInt(currentPlace.getWeapons().size());
 
 
     }
@@ -385,6 +293,13 @@ public class GameStart {
     //Hero choice to suing potion option for the healing himself will be using potion.
     public static void usePotion() {
         printHeading("Use potion for the healing himself!");
+        Random random = new Random();
+        boolean doesExist = random.nextInt(2) == 1;
+        if (doesExist){
+            System.out.println("You found a potion, and you can put it in your inventory or can use it.");
+            int potion = random.nextInt(20);
+            currentHero.setHeroHp(potion);
+        }
 
     }
 
@@ -425,7 +340,13 @@ public class GameStart {
     //Getting hero's info
     public static void heroInfo() {
         printSeparator(30);
-        System.out.println("Name of Hero: " + currentHero.getHeroName() +
+        int count = 0;
+        for (IWeapon weapon: currentHero.getHerosInventory()){
+            System.out.println(count++ +". "+weapon);
+        }
+        printSeparator(30);
+        System.out.println("Name of Hero: " + currentHero.getHeroName() +", " +
+                "\nand his Primary Weapon is: "+primaryWeapon+". "+
                 "\nHero's Hp: " + currentHero.getHeroHp() + "." +
                 "\nHero's Max-Hp: " + currentHero.getHeroMaxHp() + "." +
                 "\nHero's make a damage : " + currentHero.getHeroDamage() + ".");
@@ -461,11 +382,9 @@ public class GameStart {
                 "\nPlease read info and follow the guidelines...");
         createHero();
         createPlace("Shire");
-        createWeapon();
+
         createEnemy();
-        System.out.println(currentPlace.getExits().get(2));
+        System.out.println(currentPlace.getExits());
        gameLoop();
     }
-
-
 }

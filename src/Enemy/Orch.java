@@ -1,6 +1,7 @@
 package Enemy;
 
 import Weapon.IWeapon;
+import Weapon.Sword;
 import Weapon.WeaponBase;
 
 import java.util.ArrayList;
@@ -8,17 +9,19 @@ import java.util.List;
 
 public class Orch implements IEnemy{
     private int enemyDamage;
+    private EnemyBase.EnemyNames type;
     private int enemyHp;
     private String enemyName;
     private int enemyXp;
     private String desc;
     private List<IWeapon> weapons;
 
-    public Orch(EnemyBase.EnemyNames type, String name, int damage, int hp, int xp) {
-        this.enemyName = name;
-        this.enemyDamage = damage;
-        this.enemyHp = hp;
-        this.enemyXp = xp;
+    public Orch() {
+        this.type= EnemyBase.EnemyNames.ORCH;
+        this.enemyName = "Orch";
+        this.enemyDamage = 8;
+        this.enemyHp = 30;
+        this.enemyXp = 1;
         this.weapons = new ArrayList<>();
     }
     @Override
@@ -48,16 +51,9 @@ public class Orch implements IEnemy{
 
     @Override
     public List<IWeapon> getEnemyInventory() {
+        this.weapons.add(new Sword());
         return this.weapons;
     }
 
-    @Override
-    public void addWeaponToEnemy(IWeapon weapon) {
-        weapons.add(weapon);
-    }
 
-    @Override
-    public void removeWeaponToEnemy(IWeapon weapon) {
-        weapons.remove(weapon);
-    }
 }

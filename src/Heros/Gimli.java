@@ -1,6 +1,7 @@
 package Heros;
 
 import Weapon.IWeapon;
+import Weapon.Sword;
 import Weapon.WeaponBase;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Gimli implements IHero {
         this.heroName = "Gimli";
         this.heroDamage = 70;
         this.heroHp = 8;
+        this.heroDesc = "A bearded, ax-wielding warrior dwarf. Gimli is a brave and loyal member of the fellowship of the ring. ";
         heroWeapons = new ArrayList<>();
     }
 
@@ -33,7 +35,7 @@ public class Gimli implements IHero {
 
     @Override
     public int getHeroHp() {
-        return this.heroHp ;
+        return this.heroHp;
     }
 
     @Override
@@ -47,30 +49,32 @@ public class Gimli implements IHero {
     }
 
     @Override
-    public void setHeroHp(int hp) {this.heroHp = hp;
+    public void setHeroHp(int hp) {
+        if (this.heroDamage + hp > this.heroMaxHp) {
+            this.heroDamage = this.heroMaxHp;
+        } else {
+            this.heroHp = hp;
+        }
+    }
+    @Override
+    public void setHeroDamage(int damage) {
+        this.heroDamage = damage;
     }
 
     @Override
-    public void setHeroDamage(int damage) {
-        this.heroDamage =damage;
-    }
-    @Override
     public String getHeroDescription() {
-        return "A bearded, ax-wielding warrior dwarf. Gimli is a brave and loyal member of the fellowship of the ring. ";
+        return this.heroDesc;
     }
 
     @Override
     public List<IWeapon> getHerosInventory() {
-        return this.heroWeapons;
+         return this.heroWeapons;
     }
 
     @Override
-    public void addWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.add(weapon);
+    public String toString(){
+        return this.heroName+"'s \nHp: "+this.heroHp+"\nSingle Damage: "+this.heroDamage;
     }
 
-    @Override
-    public void removeWeaponToInventoryList(IWeapon weapon) {
-        heroWeapons.remove(weapon);
-    }
+
 }
