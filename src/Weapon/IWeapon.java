@@ -9,4 +9,5 @@ public interface IWeapon {
     public String getWeaponDescription();
     public int getDamage();
     public List<IWeapon> getWeapons();
+
 }

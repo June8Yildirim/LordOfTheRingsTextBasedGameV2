@@ -28,7 +28,6 @@ public class GameStart {
         printSeparator(30);
         System.out.println(title);
         printSeparator(30);
-//        System.out.println(" ");
     }
 
     // method to print a separator with length
@@ -120,32 +119,15 @@ public class GameStart {
             showMenu();
             int input = readInt(7);
             switch (input) {
-                case 0:
-                    showMenu();
-                    break;
-                case 1:
-                    heroInfo();
-                    break;
-                case 2:
-                    enemyInfo();
-                    break;
-                case 3:
-                    weaponInfo();
-                    break;
-                case 4:
-                    placeInfo();
-                    break;
-                case 5:
-                    move();
-                    break;
-                    case 6:
-                    randomEncounter();
-                    break;
-                case 7:
-                    isRunning = false;
-                    break;
-                default:
-                    System.out.println("Invalid Entry");
+                case 0 -> showMenu();
+                case 1 -> currentHero.heroInfo(primaryWeapon);
+                case 2 -> System.out.println(currentEnemy.toString());
+                case 3 -> System.out.println(currentWeapon.toString());
+                case 4 -> System.out.println(currentPlace.toString());
+                case 5 -> move();
+                case 6 -> randomEncounter();
+                case 7 -> isRunning = false;
+                default -> System.out.println("Invalid Entry");
             }
             printHeading("Select the one of the option.");
         }
@@ -242,6 +224,8 @@ public class GameStart {
 
     public static void battle() {
 //        currentEnemy= objects.createEnemy();
+        EncounterEnemy encounter = new EncounterEnemy(currentHero,currentWeapon,currentEnemy,currentPlace);
+        encounter.encounterFight();
         while (isFighting) {
 
             System.out.println("What's your decision about this enemy." +
@@ -249,11 +233,12 @@ public class GameStart {
                     "\n(1) Fight,\n(2) Change weapon\n(3) Use Potion for healing,\n(4) Run away.\n(5) Call another Hero for the help.");
             printSeparator(20);
             int battleDecision = readInt(5);
+            displayHealthConditions();
             switch (battleDecision) {
-                case 1 -> fight();
-                case 2 -> changeWeapon();
-                case 3 -> usePotion();
-                case 4 -> runAway();
+                case 1 -> encounter.encounterFight();
+                case 2 -> encounter.getHeroPrimaryWeapon();
+                case 3 -> encounter.usePotion();
+                case 4 -> encounter.runAway();
                 case 5 -> callAnotherHero();
                 case 6-> displayHealthConditions();
             }
@@ -268,112 +253,12 @@ public class GameStart {
         printSeparator(20);
     }
 
-    // fighting for the current enemy.
-    public static void fight() {
-        displayHealthConditions();
-        EncounterEnemy encounter = new EncounterEnemy(currentHero,currentWeapon,currentEnemy,currentPlace);
-        encounter.encounterFight();
-    }
-
-    //Change hero's weapon in his inventory
-    public static void changeWeapon() {
-        System.out.println("Your current weapon is " + currentWeapon.getName());
-        System.out.println("Currently you are " + currentPlace.getName() + "." +
-                "\nIn your location there is/(are) some weapons.");
-        //Doesn't finish yet Look very closely.
-        for (IWeapon weapon : currentPlace.getWeapons()){
-            System.out.println("1. "+ weapon);
-        }
-        System.out.println("Select a weapon from your list.");
-        int choice = readInt(currentPlace.getWeapons().size());
-
-
-    }
-
-    //Hero choice to suing potion option for the healing himself will be using potion.
-    public static void usePotion() {
-        printHeading("Use potion for the healing himself!");
-        Random random = new Random();
-        boolean doesExist = random.nextInt(2) == 1;
-        if (doesExist){
-            System.out.println("You found a potion, and you can put it in your inventory or can use it.");
-            int potion = random.nextInt(20);
-            currentHero.setHeroHp(potion);
-        }
-
-    }
-
-    //If hero thinks cannot defeat this enemy, can use run away option, however while hero is trying to run away, might takes damage(s).
-    public static void runAway() {
-        int runAwayChance = random.nextInt(20) + 1;
-        if (runAwayChance <= currentEnemy.getEnemyHp() / 10) {
-            printHeading("You ran away from the " + currentEnemy.getEnemyName());
-        } else {
-            printHeading("You didn't manage to run away from the " + currentEnemy.getEnemyName());
-            currentHero.setHeroHp(currentHero.getHeroHp() - runAwayChance);
-            printHeading("You took" + runAwayChance + " damage(s) while you were trying to run away");
-            if (currentHero.getHeroHp() <= 0) {
-                printHeading("After this attempt you took too much damage,\n");
-                playerDied();
-            }
-        }
-
-    }
-
     // if any condition player's dead, game will be exit.Game exiting point.
     public static void playerDied() {
         printHeading("You died!");
         printHeading("You had " + currentHero.getHeroHp() + " on your journey. Try to earn more next time.");
         System.out.println("Thank you!!!");
         isRunning = false;
-    }
-
-
-    //Getting weapon's info
-    public static void weaponInfo() {
-        printSeparator(20);
-        System.out.println("Name of weapon is : " + currentWeapon.getName() + "." +
-                "\nWeapon damage is : " + currentWeapon.getDamage());
-        printSeparator(20);
-    }
-
-    //Getting hero's info
-    public static void heroInfo() {
-        printSeparator(30);
-        int count = 0;
-        for (IWeapon weapon: currentHero.getHerosInventory()){
-            System.out.println(count++ +". "+weapon);
-        }
-        printSeparator(30);
-        System.out.println("Name of Hero: " + currentHero.getHeroName() +", " +
-                "\nand his Primary Weapon is: "+primaryWeapon+". "+
-                "\nHero's Hp: " + currentHero.getHeroHp() + "." +
-                "\nHero's Max-Hp: " + currentHero.getHeroMaxHp() + "." +
-                "\nHero's make a damage : " + currentHero.getHeroDamage() + ".");
-        printSeparator(20);
-        System.out.println(currentHero.getHeroDescription());
-        printSeparator(30);
-    }
-
-    //Getting enemy's info
-    public static void enemyInfo() {
-        printSeparator(30);
-        System.out.println("Name of Enemy: " + currentEnemy.getEnemyName() +
-                "\nHero's Hp: " + currentEnemy.getEnemyHp() + "." +
-                "\nHero's make a damage : " + currentEnemy.getEnemyDamage() + ".");
-        printSeparator(20);
-        System.out.println(currentEnemy.getEnemyDesc());
-        printSeparator(30);
-    }
-
-    //Getting place info
-    public static void placeInfo() {
-        printSeparator(20);
-        System.out.println("Name of place is : " + currentPlace.getName() + "." +
-                "\nDifficulties is : " + currentPlace.getDifficulties());
-        printSeparator(20);
-        System.out.println(currentPlace.getDescription());
-        printSeparator(20);
     }
 
     //the gaming starting point

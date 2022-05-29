@@ -69,6 +69,25 @@ public class Strider implements IHero {
     public List<IWeapon> getHerosInventory() {
          return this.heroWeapons;
     }
+
+    @Override
+    public void heroInfo(IWeapon primaryWeapon) {
+        System.out.println("=====================================");
+        int count = 0;
+        for (IWeapon weapon: this.getHerosInventory()){
+            System.out.println(count++ +". "+weapon);
+        }
+        System.out.println("=====================================");
+        System.out.println("Name of Hero: " + this.getHeroName() +", " +
+                "\nand his Primary Weapon is: "+ primaryWeapon+". "+
+                "\nHero's Hp: " + this.getHeroHp() + "." +
+                "\nHero's Max-Hp: " + this.getHeroMaxHp() + "." +
+                "\nHero's make a damage : " + this.getHeroDamage() + ".");
+        System.out.println("=====================================");
+        System.out.println(this.getHeroDescription());
+        System.out.println("=====================================");
+    }
+
     @Override
     public String toString(){
         return this.heroName+"'s \nHp: "+this.heroHp+"\nSingle Damage: "+this.heroDamage;

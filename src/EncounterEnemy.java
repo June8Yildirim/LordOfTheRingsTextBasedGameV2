@@ -75,7 +75,7 @@ public class EncounterEnemy {
                     GameStart.battle();
                 } else {
                     //finishing battle loop.
-                   getHeroPrimaryWeapon();
+                   GameStart.isRunning = false;
                 }
             }
         } else {
@@ -105,6 +105,36 @@ public class EncounterEnemy {
             System.out.println(count++ +". "+weapon);
         }
         encounterFight();
+
+    }
+
+    //Hero choice to suing potion option for the healing himself will be using potion.
+    public  void usePotion() {
+        GameStart.printHeading("Use potion for the healing himself!");
+        Random random = new Random();
+        boolean doesExist = random.nextInt(2) == 1;
+        if (doesExist){
+            System.out.println("You found a potion, and you can put it in your inventory or can use it.");
+            int potion = random.nextInt(20);
+            this.currentHero.setHeroHp(potion);
+        }
+
+    }
+
+    //If hero thinks cannot defeat this enemy, can use run away option, however while hero is trying to run away, might takes damage(s).
+    public  void runAway() {
+        int runAwayChance = random.nextInt(20) + 1;
+        if (runAwayChance <= currentEnemy.getEnemyHp() / 10) {
+            GameStart.printHeading("You ran away from the " + currentEnemy.getEnemyName());
+        } else {
+            GameStart.printHeading("You didn't manage to run away from the " + currentEnemy.getEnemyName());
+            currentHero.setHeroHp(currentHero.getHeroHp() - runAwayChance);
+            GameStart.printHeading("You took" + runAwayChance + " damage(s) while you were trying to run away");
+            if (currentHero.getHeroHp() <= 0) {
+                GameStart.printHeading("After this attempt you took too much damage,\n");
+                GameStart.playerDied();
+            }
+        }
 
     }
 }

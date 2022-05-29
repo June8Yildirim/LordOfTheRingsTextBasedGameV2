@@ -15,5 +15,6 @@ public interface IHero {
     public void setHeroDamage(int damage);
     public String getHeroDescription();
     public List<IWeapon> getHerosInventory();
+    public void heroInfo(IWeapon primaryWeapon);
 
 }

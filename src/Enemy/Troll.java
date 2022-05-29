@@ -54,5 +54,21 @@ public class Troll implements IEnemy {
         this.weapons.add(new Sword());
         return this.weapons;
     }
+    @Override
+    public String toString() {
+        int count = 1;
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append("\n=====================================\n");
 
+        strBuild.append("Enemy's Weapons\n");
+        for (IWeapon weapon : this.weapons) {
+            strBuild.append(count++ + ". " + weapon+"\n");
+        }
+        strBuild.append("\n=====================================\n");
+        strBuild.append("Name of Enemy: ").append(this.enemyName).append(", ").append("\nEnemy's Hp: ").append(this.enemyHp).append(".").append("\nEnemy's Xp: ").append(this.enemyHp).append(".").append("\nEnemy's make a damage : ").append(this.enemyDamage).append(".");
+        strBuild.append("\n=====================================\n");
+        strBuild.append(this.desc);
+        strBuild.append("\n=====================================\n");
+        return strBuild.toString();
+    }
 }

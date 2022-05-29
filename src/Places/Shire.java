@@ -76,4 +76,34 @@ public class Shire implements IPlace{
         return connections;
     }
 
+    @Override
+    public String toString() {
+        int count = 1;
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append("\n=====================================\n");
+
+        strBuild.append("Place's Weapons\n");
+        for (IWeapon weapon : this.placeWeapons) {
+            strBuild.append(count++ + ". " + weapon+"\n");
+        }
+
+        count = 1;
+        strBuild.append("Place encounterable Enemies\n");
+        for (IEnemy enemy : this.enemies) {
+            strBuild.append(count++ + ". " + enemy+"\n");
+        }
+
+        count = 1;
+        strBuild.append("Place's Connection\n");
+        for (Map.Entry<String, Integer> place : getExits().entrySet()) {
+            strBuild.append(count++ + ". " + place+"\n");
+        }
+        strBuild.append("\n=====================================\n");
+        strBuild.append("Name of Place: ").append(this.Name).append(", ").append("\nPlace's challenging rate: ").append(this.difficulties).append(".");
+        strBuild.append("\n=====================================\n");
+        strBuild.append(this.desc);
+        strBuild.append("\n=====================================\n");
+        return strBuild.toString();
+    }
+
 }
