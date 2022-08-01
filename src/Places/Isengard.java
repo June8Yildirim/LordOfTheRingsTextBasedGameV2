@@ -7,7 +7,7 @@ import Enemy.Uruk_Hai;
 import Weapon.GandalfStaff;
 import Weapon.Glamdring;
 import Weapon.IWeapon;
-import Weapon.WeaponBase;
+import static Places.PlaceBase.wrapText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Isengard implements IPlace{
 
     public Isengard() {
         this.difficulties = 8;
-        this.description = "An extremely defensible fortress in Rohan built by the Númenoreans ages before the War of the Ring takes place. Saruman took up residence there at the invitation of the king of Rohan. He fortified it further and built an army of orcs. From Orthanc, Isengard's 500-foot-tall tower of unbreakable stone, Saruman seeks the One Ring for himself.";
+        this.description = wrapText("An extremely defensible fortress in Rohan built by the Númenoreans ages before the War of the Ring takes place. Saruman took up residence there at the invitation of the king of Rohan. He fortified it further and built an army of orcs. From Orthanc, Isengard's 500-foot-tall tower of unbreakable stone, Saruman seeks the One Ring for himself.");
         this.Name = "Isengard";
         this.type = PlaceBase.PLACENAME.ISENGARD;
         enemies = new ArrayList<>();

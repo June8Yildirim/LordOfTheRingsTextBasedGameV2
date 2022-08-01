@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static Places.PlaceBase.wrapText;
+
 public class Shire implements IPlace{
     private String desc;
     private PlaceBase.PLACENAME type;
@@ -27,7 +29,7 @@ public class Shire implements IPlace{
         }
         this.difficulties = 5;
         this.Name = "Shire";
-        this.desc = "Located in the northwest of Middle-earth, the Shire is a loosely organized territory in which most of Middle-earth's hobbits live. It is a bucolic, agricultural land that has seen little of the evil growing to the east. The Baggins family home of Bag End is in Hobbiton, a large town in the western farthing, or district, of the Shire.";
+        this.desc = wrapText("Located in the northwest of Middle-earth, the Shire is a loosely organized territory in which most of Middle-earth's hobbits live. It is a bucolic, agricultural land that has seen little of the evil growing to the east. The Baggins family home of Bag End is in Hobbiton, a large town in the western farthing, or district, of the Shire.");
         this.type = PlaceBase.PLACENAME.SHIRE;
         this.enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();
@@ -105,5 +107,21 @@ public class Shire implements IPlace{
         strBuild.append("\n=====================================\n");
         return strBuild.toString();
     }
+
+//    public String wrapText(String desc){
+//        int LINE_LENGTH = 0;
+//        StringBuilder str = new StringBuilder();
+//        String[] wordList = desc.split(" ");
+//        for (int i = 0; i < wordList.length; i++) {
+//            if( LINE_LENGTH <= 10){
+//                str.append(wordList[i]+" ");
+//                LINE_LENGTH++;
+//            }else{
+//                str.append("\n");
+//              LINE_LENGTH = 0;
+//            }
+//        }
+//      return   str.toString();
+//    }
 
 }

@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Poison implements IWeapon {
     private String weaponName;

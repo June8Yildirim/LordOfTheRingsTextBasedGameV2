@@ -3,11 +3,10 @@ package Enemy;
 import Weapon.IWeapon;
 import Weapon.OneRing;
 import Weapon.Warhammer;
-import Weapon.WeaponBase;
-
-
 import java.util.ArrayList;
 import java.util.List;
+import static Enemy.EnemyBase.wrapText;
+
 
 public class Sauron implements IEnemy{
     private int enemyDamage;
@@ -24,8 +23,7 @@ public class Sauron implements IEnemy{
         this.enemyDamage = 30;
         this.enemyHp = 140;
         this.enemyXp = 10;
-        this.desc= "The Abhorred or the eponymous Lord of the Rings, was a fallen Maia, creator of the One Ring, a gifted student of Vala Aulë the Smith and lieutenant of Melkor (Morgoth). After his master's defeat by the Valar, Sauron became the second Dark Lord and sought to conquer Arda by creating the Rings of Power." +
-                "In the Second Age, he was defeated in the War of the Last Alliance of Elves and Men united under kings Gil-galad and Elendil. In the final battle, Isildur managed to cut the One Ring from Sauron's finger, dismantling the Dark Lord's corporeal form and power. After centuries lying dormant, rebuilding his strength, Sauron returned to power late in the Third Age, but was permanently crippled in the War of the Ring after destruction of the One Ring in the fires of Mount Doom by a hobbit Frodo Baggins.";
+        this.desc= wrapText("The Abhorred or the eponymous Lord of the Rings, was a fallen Maia, creator of the One Ring, a gifted student of Vala Aulë the Smith and lieutenant of Melkor (Morgoth). After his master's defeat by the Valar, Sauron became the second Dark Lord and sought to conquer Arda by creating the Rings of Power. In the Second Age, he was defeated in the War of the Last Alliance of Elves and Men united under kings Gil-galad and Elendil. In the final battle, Isildur managed to cut the One Ring from Sauron's finger, dismantling the Dark Lord's corporeal form and power. After centuries lying dormant, rebuilding his strength, Sauron returned to power late in the Third Age, but was permanently crippled in the War of the Ring after destruction of the One Ring in the fires of Mount Doom by a hobbit Frodo Baggins.");
         weapons = new ArrayList<>();
 
     }

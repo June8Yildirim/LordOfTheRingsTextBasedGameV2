@@ -3,10 +3,9 @@ package Enemy;
 import Weapon.Axe;
 import Weapon.IWeapon;
 import Weapon.Sword;
-import Weapon.WeaponBase;
-
 import java.util.ArrayList;
 import java.util.List;
+import static Enemy.EnemyBase.wrapText;
 
 public class Goblin implements IEnemy{
     private int enemyDamage;
@@ -23,7 +22,7 @@ public class Goblin implements IEnemy{
         this.enemyDamage = 15;
         this.enemyHp = 75;
         this.enemyXp = 1;
-        this.desc = "There must be a description";
+        this.desc = wrapText("There must be a description");
         this.weapons = new ArrayList<>();
     }
     @Override

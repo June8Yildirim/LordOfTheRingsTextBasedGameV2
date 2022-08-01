@@ -9,6 +9,8 @@ import Weapon.WeaponBase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Enemy.EnemyBase.wrapText;
+
 public class Nazgul implements IEnemy{
     private int enemyDamage;
     private EnemyBase.EnemyNames type;
@@ -23,7 +25,7 @@ public class Nazgul implements IEnemy{
         this.enemyDamage = 22;
         this.enemyHp = 130;
         this.enemyXp = 3;
-        this.desc = "The Nazgûl (B. S.;\"The Ringwraiths\") or Úlairi (Q.[2]), also known as the Black Riders or simply The Nine, were the dreaded ring-servants of the Dark Lord Sauron in Middle-earth throughout the Second and Third Ages, who in the later years of the Third Age dwelt in Minas Morgul and Dol Guldur.";
+        this.desc = wrapText("The Nazgûl (B. S.;\"The Ringwraiths\") or Ulairi (Q.[2]), also known as the Black Riders or simply The Nine, were the dreaded ring-servants of the Dark Lord Sauron in Middle-earth throughout the Second and Third Ages, who in the later years of the Third Age dwelt in Minas Morgul and Dol Guldur.");
         this.weapons = new ArrayList<>();
     }
     @Override

@@ -6,6 +6,7 @@ import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class Elrond implements IHero {
     private String heroName;
@@ -21,7 +22,7 @@ public class Elrond implements IHero {
         this.heroName = "Elrond";
         this.heroDamage = 24;
         this.heroHp = 115;
-        this.heroDesc ="Ruler of the Rivendell elves and Arwen’s father. Though Elrond is sympathetic to the goals of the fellowship, his primary concern is the safety of his elf subjects. The elves face a choice: they can leave Middle-earth for immortal life, or they can delay their departure and contribute to the fight against Sauron. Elrond has a low opinion of men, as he was with Isildur when the king failed to destroy the ring of power. For this reason and because of his concerns about Arwen’s life, he is reluctant to aid in the fight against Sauron. Eventually, he commits himself to the ancient alliance of men and elves, sends an army to defend Rohan, and reforges Isildur’s sword for Aragorn.";
+        this.heroDesc = wrapText("Ruler of the Rivendell elves and Arwen’s father. Though Elrond is sympathetic to the goals of the fellowship, his primary concern is the safety of his elf subjects. The elves face a choice: they can leave Middle-earth for immortal life, or they can delay their departure and contribute to the fight against Sauron. Elrond has a low opinion of men, as he was with Isildur when the king failed to destroy the ring of power. For this reason and because of his concerns about Arwen’s life, he is reluctant to aid in the fight against Sauron. Eventually, he commits himself to the ancient alliance of men and elves, sends an army to defend Rohan, and reforges Isildur’s sword for Aragorn.");
         this.heroWeapons = new ArrayList<>();
     }
 

@@ -4,7 +4,7 @@ import Weapon.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static Enemy.EnemyBase.wrapText;
 public class Saruman implements IEnemy {
     private int enemyDamage;
     private int enemyHp;
@@ -20,7 +20,7 @@ public class Saruman implements IEnemy {
         this.enemyDamage = 25;
         this.enemyHp = 110;
         this.enemyXp = 3;
-        this.desc = "A wizard who joins forces with Sauron. A former friend of Gandalf, Saruman has been tempted by evil and has allied with Sauron. At his mighty tower, Orthanc, he creates countless Uruk-hai, monsters that terrorize Middle-earth.";
+        this.desc = wrapText("A wizard who joins forces with Sauron. A former friend of Gandalf, Saruman has been tempted by evil and has allied with Sauron. At his mighty tower, Orthanc, he creates countless Uruk-hai, monsters that terrorize Middle-earth.");
         weapons  = new ArrayList<>();
     }
 

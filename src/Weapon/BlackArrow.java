@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class BlackArrow implements IWeapon {
     private String weaponName;
@@ -13,7 +14,7 @@ public class BlackArrow implements IWeapon {
         this.weaponName = "BlackArrow";
         this.weaponDamage = 17;
         weapons = new ArrayList<>();
-        this.weaponDesc = "The Black Arrow plays an important role in The Hobbit: The Desolation of Smaug. Even though it is only good for one use, the sole purpose of this heirloom to the house of Girion is to destroy dragons - more specifically, to end Smaug the Golden's life.";
+        this.weaponDesc = wrapText("The Black Arrow plays an important role in The Hobbit: The Desolation of Smaug. Even though it is only good for one use, the sole purpose of this heirloom to the house of Girion is to destroy dragons - more specifically, to end Smaug the Golden's life.");
     }
 
     @Override

@@ -47,5 +47,19 @@ public class HeroBase {
         }
         return hero;
     }
-
+    public static  String wrapText(String desc){
+        int LINE_LENGTH = 0;
+        StringBuilder str = new StringBuilder();
+        String[] wordList = desc.split(" ");
+        for (int i = 0; i < wordList.length; i++) {
+            if( LINE_LENGTH <= 10){
+                str.append(wordList[i]+" ");
+                LINE_LENGTH++;
+            }else{
+                str.append("\n");
+                LINE_LENGTH = 0;
+            }
+        }
+        return   str.toString();
+    }
 }

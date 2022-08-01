@@ -6,6 +6,7 @@ import Weapon.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import static Places.PlaceBase.wrapText;
 
 public class Rivendell implements IPlace{
     private String desc;
@@ -21,7 +22,7 @@ public class Rivendell implements IPlace{
         this.Name = "Rivendel";
         this.type = PlaceBase.PLACENAME.RIVENDELL;
         this.enemies = new ArrayList<>();
-        this.desc ="Imladris, known to men as Rivendell, is Elrond Halfelven's refuge in the western reaches of the Misty Mountains. Bilbo Baggins visits during the Quest of Erebor (2941), and later takes up residence there. In 3018 Frodo Baggins reaches Rivendell with the One Ring and the council of Elrond creates the Fellowship of the Ring.";
+        this.desc =wrapText("Imladris, known to men as Rivendell, is Elrond Halfelven's refuge in the western reaches of the Misty Mountains. Bilbo Baggins visits during the Quest of Erebor (2941), and later takes up residence there. In 3018 Frodo Baggins reaches Rivendell with the One Ring and the council of Elrond creates the Fellowship of the Ring.");
         this.placeWeapons = new ArrayList<>();
         this.placeWeapons.add(new Elfbow());
         this.placeWeapons.add(new ElrondRing());

@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Glamdring implements IWeapon {
     private String weaponName;
@@ -12,8 +13,7 @@ public class Glamdring implements IWeapon {
     public Glamdring() {
         this.weaponName = "Glandring";
         this.weaponDamage = 13;
-        this.weaponDesc = " Glamdring had a Rune inscription and would glow blue in the presence of Orcs." +
-                "History: Made by the High Elves in the West, Gandalf found Glamdring in the trolls’ cave as he and Thorin’s company were making their way to the Misty Mountains.";
+        this.weaponDesc = wrapText(" Glamdring had a Rune inscription and would glow blue in the presence of Orcs. History: Made by the High Elves in the West, Gandalf found Glamdring in the trolls’ cave as he and Thorin’s company were making their way to the Misty Mountains.");
         weapons = new ArrayList<>();
     }
 

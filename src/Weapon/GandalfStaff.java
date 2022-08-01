@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class GandalfStaff implements IWeapon {
     private String weaponName;
@@ -12,8 +13,7 @@ public class GandalfStaff implements IWeapon {
     public GandalfStaff() {
         this.weaponName = "Gandalf Staff";
         this.weaponDamage = 18;
-        this.weaponDesc = "Gandalf had two staffs. The first was made of gnarled wood and cradled a jewel at the top that would light up. His second staff was white with a slightly more geometric design." +
-                "History: When he returned from the dead, Galadriel gave Gandalf a new white staff. In the films, his white staff was shattered by the Witch King in Minas Tirith.";
+        this.weaponDesc = wrapText("Gandalf had two staffs. The first was made of gnarled wood and cradled a jewel at the top that would light up. His second staff was white with a slightly more geometric design. History: When he returned from the dead, Galadriel gave Gandalf a new white staff. In the films, his white staff was shattered by the Witch King in Minas Tirith.");
         weapons = new ArrayList<>();
     }
 

@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Spears implements IWeapon {
     private String weaponName;
@@ -13,7 +14,7 @@ public class Spears implements IWeapon {
         this.weaponName = "Spear";
         this.weaponDamage = 0;
         weapons = new ArrayList<>();
-        this.weaponDesc = "Spears were common in Middle-earth. The Vanyar were famous for their spears. The Rangers of the Grey Company bore spears in the Battle of the Pelennor Fields. ";
+        this.weaponDesc = wrapText("Spears were common in Middle-earth. The Vanyar were famous for their spears. The Rangers of the Grey Company bore spears in the Battle of the Pelennor Fields. ");
     }
 
     @Override

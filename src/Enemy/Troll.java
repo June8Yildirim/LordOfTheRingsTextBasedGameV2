@@ -7,7 +7,7 @@ import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static Enemy.EnemyBase.wrapText;
 public class Troll implements IEnemy {
     private int enemyDamage;
     private int enemyHp;
@@ -22,7 +22,7 @@ public class Troll implements IEnemy {
         this.enemyHp = 50;
         this.enemyXp = 1;
         this.weapons = new ArrayList<>();
-        this.desc = "Stone-trolls tended to be dumb and ill-tempered. Stone-trolls ate things such as wild fowl, wild pigs/boars, dwarves, hobbits, and fish (if they could actually catch them). They hunted simply by chasing or ambushing the animals, then hitting them with a weapon such as an axe or a club.";
+        this.desc = wrapText("Stone-trolls tended to be dumb and ill-tempered. Stone-trolls ate things such as wild fowl, wild pigs/boars, dwarves, hobbits, and fish (if they could actually catch them). They hunted simply by chasing or ambushing the animals, then hitting them with a weapon such as an axe or a club.");
     }
     @Override
     public String getEnemyName() {

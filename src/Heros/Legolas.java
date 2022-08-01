@@ -6,6 +6,7 @@ import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class Legolas implements IHero {
     private String heroName;
@@ -21,7 +22,7 @@ public class Legolas implements IHero {
         this.heroName = "Legolas";
         this.heroDamage = 12;
         this.heroHp = 80;
-        this.heroDesc = "A boyish elf. Thanks to Legolas’s skill with a bow and arrow, his kill number is consistently higher than Gimli’s. Like his dwarf friend, he is a brave and loyal member of the fellowship of the ring.";
+        this.heroDesc = wrapText("A boyish elf. Thanks to Legolas’s skill with a bow and arrow, his kill number is consistently higher than Gimli’s. Like his dwarf friend, he is a brave and loyal member of the fellowship of the ring.");
         heroWeapons = new ArrayList<>();
     }
 

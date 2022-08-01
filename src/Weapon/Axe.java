@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Axe implements IWeapon {
     private String weaponName;
@@ -13,8 +14,7 @@ public class Axe implements IWeapon {
         this.weaponName = "Axe";
         this.weaponDamage = 13;
         weapons = new ArrayList<>();
-        this.weaponDesc = "In the books, Gimli is described as wielding a single axe, but in Peter Jackson’s films, Gimli wields several axes, including a bearded axe, throwing axes, and a double-bladed axe." +
-                "History: Gimli obtained his large double-bladed axe while traveling through the Mines of Moria. It’s believed that the axe belonged to his father’s cousin, Balin. Gimli is very attached to his axes.";
+        this.weaponDesc = wrapText("In the books, Gimli is described as wielding a single axe, but in Peter Jackson’s films, Gimli wields several axes, including a bearded axe, throwing axes, and a double-bladed axe. History: Gimli obtained his large double-bladed axe while traveling through the Mines of Moria. It’s believed that the axe belonged to his father’s cousin, Balin. Gimli is very attached to his axes.");
     }
 
 

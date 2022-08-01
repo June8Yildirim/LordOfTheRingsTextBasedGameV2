@@ -19,7 +19,7 @@ public class PlaceBase {
                 exits.put("RIVENDELL",5);
                 exits.put("MORIA",2);
                 place = new Shire(1,exits);
-                locations.put(1,place );
+                locations.put(1, place);
                 break;
             case "Moria":
                 exits.put("RIVENDELL",5);
@@ -55,5 +55,21 @@ public class PlaceBase {
         }
 
         return place;
+    }
+
+    public static  String wrapText(String desc){
+        int LINE_LENGTH = 0;
+        StringBuilder str = new StringBuilder();
+        String[] wordList = desc.split(" ");
+        for (int i = 0; i < wordList.length; i++) {
+            if( LINE_LENGTH <= 10){
+                str.append(wordList[i]+" ");
+                LINE_LENGTH++;
+            }else{
+                str.append("\n");
+                LINE_LENGTH = 0;
+            }
+        }
+        return   str.toString();
     }
 }

@@ -6,6 +6,7 @@ import Weapon.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import static Places.PlaceBase.wrapText;
 
 public class Minastrith implements IPlace{
     private String desc;
@@ -15,11 +16,12 @@ public class Minastrith implements IPlace{
     private List<IEnemy> enemies;
     private List<IWeapon> placeWeapons;
 
+
     public Minastrith() {
         this.difficulties = 15;
         this.Name =  "Minastrith";
         this.type = PlaceBase.PLACENAME.MINASTRITH;
-        this.desc = "The Southern counterpart to Arnor. Gondor was ruled by Elendil and his two sons until the War of the Last Alliance, when Elendil and Anarion were killed and Isildur became the high king of both kingdoms. The kingship lasted until the year 2050 of the Third Age, when the last king rode out to meet the challenge of the Witch-King of Angmar and was never seen again. After this stewards ruled until Aragorn took back the kingship of both Arnor and Gondor. Gondor had three main cities and several smaller ones. The main cities were Minas Anor (Minas Tirith), Minas Ithil (Minas Morgul), and Osgiliath.";
+        this.desc = wrapText("The Southern counterpart to Arnor. Gondor was ruled by Elendil and his two sons until the War of the Last Alliance, when Elendil and Anarion were killed and Isildur became the high king of both kingdoms. The kingship lasted until the year 2050 of the Third Age, when the last king rode out to meet the challenge of the Witch-King of Angmar and was never seen again. After this stewards ruled until Aragorn took back the kingship of both Arnor and Gondor. Gondor had three main cities and several smaller ones. The main cities were Minas Anor (Minas Tirith), Minas Ithil (Minas Morgul), and Osgiliath.");
         this.enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();
         this.placeWeapons.add(new Narsil());

@@ -150,7 +150,7 @@ public class GameStart {
             System.out.println("Possible location to move " + exit);
         }
         System.out.println("Enter place to move");
-        int choice = readInt(currentPlace.getExits().size())-1;
+        int choice = readInt(currentPlace.getExits().size());
         String moveTo = getNextLocationName(choice);
         String placeName = currentPlace.getName();
 

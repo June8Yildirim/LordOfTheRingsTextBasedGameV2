@@ -9,39 +9,34 @@ public class WeaponBase {
     }
 
     public IWeapon createWeapon(int weaponNumber){
-        IWeapon weapon = null;
-        switch (weaponNumber){
-            case 1:
-                weapon = new Knife();
-                break;
-            case 2:
-                weapon = new GandalfStaff();
-                break;
-            case 3:
-                weapon =  new ElrondRing();
-                break;
-            case 4:
-                weapon = new Glamdring();
-                break;
-            case 5:
-                weapon = new Orcrist();
-                break;
-            case 6:
-                weapon = new OneRing();
-                break;
-            case 7:
-                weapon = new Narsil();
-                break;
-            case 8:
-                weapon = new Elfbow();
-                break;
-            case 9:
-                weapon = new Sting();
-                break;
-            case 10:
-                weapon = new Axe();
-                break;
-        }
+        IWeapon weapon = switch (weaponNumber) {
+            case 1 -> new Knife();
+            case 2 -> new GandalfStaff();
+            case 3 -> new ElrondRing();
+            case 4 -> new Glamdring();
+            case 5 -> new Orcrist();
+            case 6 -> new OneRing();
+            case 7 -> new Narsil();
+            case 8 -> new Elfbow();
+            case 9 -> new Sting();
+            case 10 -> new Axe();
+            default -> null;
+        };
         return weapon;
+    }
+    public static  String wrapText(String desc){
+        int LINE_LENGTH = 0;
+        StringBuilder str = new StringBuilder();
+        String[] wordList = desc.split(" ");
+        for (int i = 0; i < wordList.length; i++) {
+            if( LINE_LENGTH <= 10){
+                str.append(wordList[i]+" ");
+                LINE_LENGTH++;
+            }else{
+                str.append("\n");
+                LINE_LENGTH = 0;
+            }
+        }
+        return   str.toString();
     }
 }

@@ -5,6 +5,7 @@ import Weapon.MorgulBlade;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Enemy.EnemyBase.wrapText;
 
 public class Angmar implements IEnemy{
 
@@ -22,7 +23,7 @@ public class Angmar implements IEnemy{
         this.enemyDamage = 24;
         this.enemyHp = 120;
         this.enemyXp = 4;
-        this.desc = "One of Sauron’s most feared warriors. Unable to be killed by men, the witch-king is eventually felled by Éowyn, a woman, with the help of Merry, a hobbit. ";
+        this.desc = wrapText("One of Sauron’s most feared warriors. Unable to be killed by men, the witch-king is eventually felled by Éowyn, a woman, with the help of Merry, a hobbit. ");
         weapons =  new ArrayList<>();
     }
     @Override

@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Orcrist implements IWeapon {
     private String weaponName;
@@ -12,8 +13,7 @@ public class Orcrist implements IWeapon {
     public Orcrist() {
         this.weaponName = "Orchrist";
         this.weaponDamage = 13;
-        this.weaponDesc = "Made by the Elves of Gondolin, Orcrist was forged along with its sister blade, Glamdring. Like Glamdring and Sting, it would glow blue whenever enemies were near." +
-                "History: Orcrist was a legendary sword, known to have slain hundreds of goblins in its time.";
+        this.weaponDesc = wrapText("Made by the Elves of Gondolin, Orcrist was forged along with its sister blade, Glamdring. Like Glamdring and Sting, it would glow blue whenever enemies were near. History: Orcrist was a legendary sword, known to have slain hundreds of goblins in its time.");
         weapons = new ArrayList<>();
     }
 

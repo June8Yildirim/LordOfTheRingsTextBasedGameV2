@@ -4,6 +4,7 @@ import Enemy.IEnemy;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class Warhammer implements IWeapon {
     private String weaponName;
@@ -17,7 +18,8 @@ public class Warhammer implements IWeapon {
         this.weaponDamage =30;
         weapons = new ArrayList<>();
         enemies = new ArrayList<>();
-        this.weaponDesc = "The dark lord Morgoth (originally known as Melkor) is quite possibly one of the strongest antagonists in the history of Tolkien’s Legendarium. He is the primordial source of all evil in the world and was responsible for corrupting the Maiar, leading to the birth of the Balrogs.";}
+        this.weaponDesc = wrapText("The dark lord Morgoth (originally known as Melkor) is quite possibly one of the strongest antagonists in the history of Tolkien’s Legendarium. He is the primordial source of all evil in the world and was responsible for corrupting the Maiar, leading to the birth of the Balrogs.");
+    }
 
     @Override
     public String getName() {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static Places.PlaceBase.wrapText;
 
 public class Moria implements IPlace {
     private String desc;
@@ -27,7 +28,7 @@ public class Moria implements IPlace {
         }
         this.difficulties = 10;
         this.Name = "Moria";
-        this.desc ="Khazad-dûm lies deep in the center of the Misty Mountains and was the stronghold of Durin, eldest of the Seven Fathers of the Dwarves. After the destruction of Beleriand many dwarves emigrated to Khazad-dûm, making it the greatest of dwarven cities. The dwarves of Khazad-dûm found enthusiastic trading partners and fellow craftspeople in the elven smiths of Eregion, and they shared the longest peaceful relationship between the two races. Khazad-dûm was also the only place where the rare metal mithril could be found, but in mining mithril, the dwarves accidentally freed the balrog. The dwarves fled Khazad-dûm and hence forth it was known as Moria, the \"Black Chasm.\"";
+        this.desc =wrapText("Khazad-dûm lies deep in the center of the Misty Mountains and was the stronghold of Durin, eldest of the Seven Fathers of the Dwarves. After the destruction of Beleriand many dwarves emigrated to Khazad-dûm, making it the greatest of dwarven cities. The dwarves of Khazad-dûm found enthusiastic trading partners and fellow craftspeople in the elven smiths of Eregion, and they shared the longest peaceful relationship between the two races. Khazad-dûm was also the only place where the rare metal mithril could be found, but in mining mithril, the dwarves accidentally freed the balrog. The dwarves fled Khazad-dûm and hence forth it was known as Moria, the \"Black Chasm.\"");
         this.type = PlaceBase.PLACENAME.MORIA;
         enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();

@@ -6,6 +6,7 @@ import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class Galadriel implements IHero {
     private WeaponBase WeaponBase;
@@ -22,7 +23,7 @@ public class Galadriel implements IHero {
         this.heroName = "Galadriel";
         this.heroDamage = 25;
         this.heroHp = 120;
-        this.heroDesc = "An elf queen known as the Lady of the Woods. Galadriel is the leader of the Sylvan elves. She offers spiritual aid to Frodo, giving counsel and encouraging him during the dark moments of his quest. She gives him a star of light that proves essential to Frodo when he is betrayed by Gollum and trapped in the spider Shelob’s webs.";
+        this.heroDesc = wrapText("An elf queen known as the Lady of the Woods. Galadriel is the leader of the Sylvan elves. She offers spiritual aid to Frodo, giving counsel and encouraging him during the dark moments of his quest. She gives him a star of light that proves essential to Frodo when he is betrayed by Gollum and trapped in the spider Shelob’s webs.");
         heroWeapons = new ArrayList<>();
     }
 

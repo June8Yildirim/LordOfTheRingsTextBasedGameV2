@@ -2,10 +2,9 @@ package Heros;
 
 import Weapon.IWeapon;
 import Weapon.Sword;
-import Weapon.WeaponBase;
-
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class WhiteGandalf implements IHero {
     private String heroName;
@@ -21,7 +20,7 @@ public class WhiteGandalf implements IHero {
         this.heroName = "Gandalf the White";
         this.heroDamage = 110;
         this.heroHp = 21;
-        this.heroDesc = "Gandalf the gray was named fighting after the BALROG, Gandalf the white, and he became master of the wizards council.";
+        this.heroDesc = wrapText("Gandalf the gray was named fighting after the BALROG, Gandalf the white, and he became master of the wizards council.");
         heroWeapons = new ArrayList<>();
     }
 

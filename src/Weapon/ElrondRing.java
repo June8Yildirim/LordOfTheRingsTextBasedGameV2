@@ -2,6 +2,7 @@ package Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Weapon.WeaponBase.wrapText;
 
 public class ElrondRing implements IWeapon {
     private String weaponName;
@@ -12,8 +13,7 @@ public class ElrondRing implements IWeapon {
     public ElrondRing() {
         this.weaponName = "Elrond Ring";
         this.weaponDamage = 15;
-        this.weaponDesc = "Vilya was the strongest of the three Elven rings. Its exact powers are unknown, but it is believed that it gave its bearer healing powers and control over minor elements, such as water. Elrond’s ability to summon a torrent of water to chase off the Ringwraiths is thought to be in part powered by Vilya." +
-                "History: Just before the death of Gil-galad, the High King of the Ñoldor in Middle-Earth, the ring was given to Elrond.";
+        this.weaponDesc = wrapText("Vilya was the strongest of the three Elven rings. Its exact powers are unknown, but it is believed that it gave its bearer healing powers and control over minor elements, such as water. Elrond’s ability to summon a torrent of water to chase off the Ringwraiths is thought to be in part powered by Vilya. History: Just before the death of Gil-galad, the High King of the Ñoldor in Middle-Earth, the ring was given to Elrond.");
         weapons = new ArrayList<>();
     }
 

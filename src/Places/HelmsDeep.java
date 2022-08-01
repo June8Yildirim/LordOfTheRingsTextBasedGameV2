@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static Places.PlaceBase.wrapText;
+
 public class HelmsDeep implements IPlace{
     private String desc;
     private PlaceBase.PLACENAME type;
@@ -22,8 +24,8 @@ public class HelmsDeep implements IPlace{
     public HelmsDeep() {
         this.difficulties = 13;
         this.Name =  "Helms Deep";
-        this.desc ="When he learns of Saruman's intentions of destroying Rohan, King Théoden decides to evacuate Edoras and move his people to Helm's Deep. While on the move, a pack of Wargs attack, but are driven off. At Helm's Deep, Théoden finds that many of his men are too old or too young, but he is still confident that the hold cannot be overrun since it has never fallen. Hopes are bolstered by the arrival of Haldir and a force of Elves." +
-                "Soon, a huge force of Saruman's Uruk-hai arrive and surround the hold. The attack begins and the hold stands until a hole is blasted in the Deeping Wall. Outlying positions are overrun and Haldir is killed. King Théoden orders that they fall back into the fortress itself. He begins to despair, but Aragorn suggests one last charge out of the Hornburg. As they charge out, Gandalf arrives with Éomer and a force of Rohirrim.";
+        this.desc = wrapText("When he learns of Saruman's intentions of destroying Rohan, King Théoden decides to evacuate Edoras and move his people to Helm's Deep. While on the move, a pack of Wargs attack, but are driven off. At Helm's Deep, Théoden finds that many of his men are too old or too young, but he is still confident that the hold cannot be overrun since it has never fallen. Hopes are bolstered by the arrival of Haldir and a force of Elves." +
+                "Soon, a huge force of Saruman's Uruk-hai arrive and surround the hold. The attack begins and the hold stands until a hole is blasted in the Deeping Wall. Outlying positions are overrun and Haldir is killed. King Théoden orders that they fall back into the fortress itself. He begins to despair, but Aragorn suggests one last charge out of the Hornburg. As they charge out, Gandalf arrives with Éomer and a force of Rohirrim.");
         this.type = PlaceBase.PLACENAME.HELMSDEEP;
         enemies = new ArrayList<>();
         this.placeWeapons = new ArrayList<>();

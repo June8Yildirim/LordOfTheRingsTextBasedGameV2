@@ -13,6 +13,7 @@ public class MoveToPlace {
     public void move(){
         for (String place : currentPlace.getExits().keySet()){
             if (moveTo.equals("SHIRE")){
+
                 currentPlace = GameStart.createPlace("Shire");
                 System.out.println("You are moving at " + currentPlace.getName());
                 GameStart.printSeparator(20);

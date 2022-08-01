@@ -5,6 +5,7 @@ import Weapon.Sword;
 import Weapon.WeaponBase;
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class Mitrahdir implements IHero {
 
@@ -21,7 +22,7 @@ public class Mitrahdir implements IHero {
         this.heroName = "Mithrandir";
         this.heroDamage = 90;
         this.heroHp = 16;
-        this.heroDesc = "Gandalf is also known as Mithrandir (i.e. \"grey wanderer\") and Olyrin, a name given to him in Valinor. In \"The Silmarillion\" wisest of the Maiar was Olyrin who dwelt in Lyrien. His ways took him often to the house of Nienna, and of her he learned pity and compassion. This gives grounds to believe that Gandalf and Olyrin was one and the same person.";
+        this.heroDesc = wrapText("Gandalf is also known as Mithrandir (i.e. \"grey wanderer\") and Olyrin, a name given to him in Valinor. In \"The Silmarillion\" wisest of the Maiar was Olyrin who dwelt in Lyrien. His ways took him often to the house of Nienna, and of her he learned pity and compassion. This gives grounds to believe that Gandalf and Olyrin was one and the same person.");
         heroWeapons = new ArrayList<>();
     }
 

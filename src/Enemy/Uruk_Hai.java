@@ -2,10 +2,9 @@ package Enemy;
 
 
 import Weapon.IWeapon;
-
-
 import java.util.ArrayList;
 import java.util.List;
+import static Enemy.EnemyBase.wrapText;
 
 public class Uruk_Hai implements IEnemy{
     private int enemyDamage;
@@ -21,8 +20,7 @@ public class Uruk_Hai implements IEnemy{
         this.enemyDamage = 15;
         this.enemyHp = 85 ;
         this.enemyXp = 2;
-        this.desc = "Uruk-hai (for short, Uruks) were brutal warriors of Middle-earth, and the strongest Orcs, who dwelt in Mordor and Isengard." +
-                "In The Lord of the Rings, the term Uruk-hai refers chiefly to those bred in Isengard, and in one context are alternatively called Isengarders, while Uruks from Mordor are called Black Uruks or Uruks of Mordor. ";
+        this.desc = wrapText("Uruk-hai (for short, Uruks) were brutal warriors of Middle-earth, and the strongest Orcs, who dwelt in Mordor and Isengard. In The Lord of the Rings, the term Uruk-hai refers chiefly to those bred in Isengard, and in one context are alternatively called Isengarders, while Uruks from Mordor are called Black Uruks or Uruks of Mordor. ");
         this.weapons =new ArrayList<>();
     }
 

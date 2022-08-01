@@ -6,6 +6,7 @@ import Weapon.WeaponBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import static Heros.HeroBase.wrapText;
 
 public class Gimli implements IHero {
 
@@ -23,7 +24,7 @@ public class Gimli implements IHero {
         this.heroName = "Gimli";
         this.heroDamage = 70;
         this.heroHp = 8;
-        this.heroDesc = "A bearded, ax-wielding warrior dwarf. Gimli is a brave and loyal member of the fellowship of the ring. ";
+        this.heroDesc = wrapText("A bearded, ax-wielding warrior dwarf. Gimli is a brave and loyal member of the fellowship of the ring. ");
         heroWeapons = new ArrayList<>();
     }
 
